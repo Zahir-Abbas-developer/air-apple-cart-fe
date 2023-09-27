@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { Button, Typography, Box } from '@mui/material';
 
 // ============== Components ==============
-import AppAvatarGroup from './AvatarGroup/AvatarGroup';
+import AppAvatarGroup from '../../components/AvatarGroup/AvatarGroup';
 
 // ====================================
 import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
@@ -49,14 +50,23 @@ const avatarGroupMockData: IAVATARGROUPDATA[] = [
 const PlanManagementModule = () => {
   return (
     <div>
-      <Box display={'flex'} justifyContent={'space-between'}>
+      <Box
+        display={'flex'}
+        justifyContent={'space-between'}
+        flexWrap={'wrap'}
+        gap={1}
+      >
         <Typography variant="h4" sx={styles.planManagementHeading}>
           Plan Management
         </Typography>
 
-        <Link href={'/super-admin-plan-management/add-plan'}>
-          <Button variant="contained">Add Plan</Button>
-        </Link>
+        <Box sx={styles.linkStyle}>
+          <Link href={'/super-admin-plan-management/add-plan'}>
+            <Button variant="contained" fullWidth>
+              Add Plan
+            </Button>
+          </Link>
+        </Box>
       </Box>
 
       <br />
@@ -75,5 +85,10 @@ const styles = {
     fontWeight: 600,
     lineHeight: '30px',
     letterSpacing: '-2%',
+  },
+  linkStyle: {
+    '@media (max-width: 400px)': {
+      width: '100%',
+    },
   },
 };
