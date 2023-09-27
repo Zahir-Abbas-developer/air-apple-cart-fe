@@ -15,16 +15,16 @@ const AppAvatarGroup = ({ data }: { data: IAVATARGROUPDATA[] }) => {
     <AvatarGroup
       max={4}
       sx={{
-        color: theme.palette.blue.light,
+        color: theme?.palette?.blue?.light,
         '&  .MuiAvatar-root': {
-          color: theme.palette.blue.light,
-          background: '#EBFAF8',
+          color: theme?.palette?.blue?.light,
+          background: '#EBFAF8', // this color needs to be defined in theme
         },
         '& .MuiAvatar-root:not(:last-child)': {
           marginLeft: '-20px',
         },
         '& .MuiAvatar-root:first-child': {
-          border: `1px solid ${theme.palette.common.white}`,
+          border: `1px solid ${theme?.palette?.common?.white}`,
           marginLeft: '-10px',
         },
       }}
@@ -36,10 +36,10 @@ const AppAvatarGroup = ({ data }: { data: IAVATARGROUPDATA[] }) => {
             alt={singleItem?.name}
             src={singleItem?.img}
             sx={{
-              background: '#EBFAF8',
-              color: theme.palette.blue.light,
+              background: '#EBFAF8', // this color needs to be defined in theme
+              color: theme?.palette?.blue?.light,
               borderRadius: '15px',
-              border: `1px solid ${theme.palette.common.white}`,
+              border: `1px solid ${theme?.palette?.common?.white}`,
             }}
           />
         ))}

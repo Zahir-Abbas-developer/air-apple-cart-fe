@@ -1,16 +1,16 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 
+// ====================================
+import Link from 'next/link';
+
 import { Button, Typography, Box } from '@mui/material';
 
-// ============== Components ==============
-import AppAvatarGroup from '../../components/AvatarGroup/AvatarGroup';
+// ====================================
+import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
 
 // ====================================
 import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
-import Link from 'next/link';
-
-// ====================================
 
 const avatarGroupMockData: IAVATARGROUPDATA[] = [
   {
@@ -45,7 +45,7 @@ const avatarGroupMockData: IAVATARGROUPDATA[] = [
   },
 ];
 
-// =======================================================================================================================
+// ==================================================================================================================================
 
 const PlanManagementModule = () => {
   return (
@@ -80,6 +80,7 @@ const PlanManagementModule = () => {
 
 export default PlanManagementModule;
 
+// ==================================================================================================================================
 const styles = {
   planManagementHeading: {
     fontWeight: 600,

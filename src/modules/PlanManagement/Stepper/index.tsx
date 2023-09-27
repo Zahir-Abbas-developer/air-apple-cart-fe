@@ -1,13 +1,12 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
+
+// ====================================
 import Check from '@mui/icons-material/Check';
+import { styled } from '@mui/material/styles';
+import { Stack, Stepper, Step, StepLabel } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { styled } from '@mui/material/styles';
-
+// ==================================================================================================================================
 const theme = createTheme({
   components: {
     MuiStepConnector: {
@@ -40,8 +39,8 @@ const theme = createTheme({
 
 const CustomStepper = styled(Stepper)(() => ({
   '.MuiStepConnector-line': {
-    border: '2px solid red', // Adjust the border properties as needed
-    borderRadius: '1px', // Adjust the border radius as needed
+    border: '2px solid red',
+    borderRadius: '1px',
   },
 }));
 
