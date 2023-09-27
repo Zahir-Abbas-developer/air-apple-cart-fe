@@ -1,10 +1,12 @@
-import MainLayout from '@/layouts/SuperAdminLayout/mainLayout';
+import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+// import MainLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
 import ExampleFolderReports from '@/modules/ExampleFolderReports';
 
 function ExampleFolderReportsPage() {
   return <ExampleFolderReports />;
 }
 export default ExampleFolderReportsPage;
+
 ExampleFolderReportsPage.getLayout = function getLayout(page: any) {
-  return <MainLayout>{page}</MainLayout>;
+  return <SuperAdminLayout>{page}</SuperAdminLayout>;
 };
