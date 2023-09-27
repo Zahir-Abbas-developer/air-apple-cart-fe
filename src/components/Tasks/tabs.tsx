@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { TasksData } from '@/mock/shared/tasks';
-import Filter from './filterWrapper';
+import Filter from './FilterWrapper';
 import { uuid } from 'uuidv4';
 
 interface TabPanelProps {

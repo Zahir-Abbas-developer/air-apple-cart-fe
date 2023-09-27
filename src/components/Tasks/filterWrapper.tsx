@@ -4,10 +4,10 @@ import React from 'react';
 import { Box, Button, TextField, TextFieldProps, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import SyncIcon from '@mui/icons-material/Sync';
-import ActionBtn from './actionBtn';
-import EditColumn from './editColumn';
-import FilterComp from './filterComp';
-import Toggler from './toggler';
+import ActionBtn from './ActionBtn';
+import EditColumn from './EditColumn';
+import FilterComp from './FilterComp';
+import Toggler from './Toggler';
 
 interface Props {
   handleActionBtn: ({}) => void;

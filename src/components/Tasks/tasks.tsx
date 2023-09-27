@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import Header from './header';
-import TabsComp from './tabs';
+import Header from './Header';
+import TabsComp from './Tabs';
 
 const TasksComp = () => {
   return (

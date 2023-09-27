@@ -1,5 +1,5 @@
 import React from 'react';
-import DrawerComp from './drawer';
+import DrawerComp from './Drawer';
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const FilterComp = () => {

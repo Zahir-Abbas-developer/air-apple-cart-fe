@@ -1,4 +1,4 @@
-import TasksComp from '@/components/Tasks/tasks';
+import TasksComp from '@/components/Tasks/Tasks';
 import React from 'react';
 
 const Tasks = () => {

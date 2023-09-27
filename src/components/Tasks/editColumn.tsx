@@ -1,5 +1,5 @@
 import React from 'react';
-import DrawerComp from './drawer';
+import DrawerComp from './Drawer';
 const EditColumn = () => {
   return (
     <DrawerComp
