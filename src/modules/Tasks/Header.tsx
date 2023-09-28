@@ -1,14 +1,19 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import ManageQueues from './ManageQueues';
+import Import from './Import';
+import ActivityAndPerformance from './ActivityAndPerformance/ActivityAndPerformance';
+import CreateTask from './CreateTask';
 
 const Header = () => {
   return (
     <Box sx={style.header}>
       <Typography sx={style.title}>Tasks</Typography>
-      <Box>
-        <Button>import</Button>
-        <Button>import</Button>
-        <Button>import</Button>
+      <Box sx={style.action}>
+        <ManageQueues />
+        <Import />
+        <ActivityAndPerformance />
+        <CreateTask />
       </Box>
     </Box>
   );

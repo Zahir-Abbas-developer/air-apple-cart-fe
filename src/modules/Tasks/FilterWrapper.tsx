@@ -3,11 +3,11 @@
 import React from 'react';
 import { Box, Button, TextField, TextFieldProps, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import SyncIcon from '@mui/icons-material/Sync';
 import ActionBtn from './ActionBtn';
 import EditColumn from './EditColumn';
 import FilterComp from './FilterComp';
 import Toggler from './Toggler';
+import { RefreshIcon } from '@/assets/images';
 
 interface Props {
   handleActionBtn: ({}) => void;
@@ -34,8 +34,12 @@ const Filter = ({
       />
       <Box display={'flex'} alignItems={'center'} gap={'8px'} flexWrap={'wrap'}>
         <Tooltip title={'Refresh Filter'}>
-          <Button size="small" variant="contained" onClick={handleRefreshList}>
-            <SyncIcon />
+          <Button
+            variant="outlined"
+            onClick={handleRefreshList}
+            sx={{ minHeight: '36px' }}
+          >
+            <RefreshIcon />
           </Button>
         </Tooltip>
         <ActionBtn onChange={handleActionBtn} />

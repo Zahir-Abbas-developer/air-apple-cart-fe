@@ -1,3 +1,4 @@
+import { GridViewIcon, ListViewIcon } from '@/assets/images';
 import { Button, ButtonGroup } from '@mui/material';
 import React from 'react';
 
@@ -6,10 +7,14 @@ const Toggler = ({ onClick = () => {} }: { onClick: ({}) => void }) => {
     <ButtonGroup
       variant="outlined"
       aria-label="outlined button group"
-      size="small"
+      sx={{ minHeight: '36px' }}
     >
-      <Button onClick={() => onClick('listView')}>One</Button>
-      <Button onClick={() => onClick('gridView')}>Two</Button>
+      <Button onClick={() => onClick('listView')}>
+        <ListViewIcon />
+      </Button>
+      <Button onClick={() => onClick('gridView')}>
+        <GridViewIcon />
+      </Button>
     </ButtonGroup>
   );
 };

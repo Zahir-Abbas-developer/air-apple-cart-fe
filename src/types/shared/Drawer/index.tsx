@@ -6,4 +6,5 @@ export interface CommonDrawerPropsI {
   okText: string;
   isOk: boolean;
   submitHandler: () => void;
+  requireFooter?: boolean;
 }

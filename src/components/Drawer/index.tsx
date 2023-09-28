@@ -18,6 +18,7 @@ const CommonDrawer = ({
   okText,
   submitHandler,
   isOk,
+  requireFooter,
 }: CommonDrawerPropsI) => {
   const theme = useTheme();
   return (
@@ -62,47 +63,49 @@ const CommonDrawer = ({
             <p>{children}</p>
           </Container>
         </Box>
-        <AppBar
-          position="static"
-          sx={{ backgroundColor: '#fff', boxShadow: 'none' }}
-        >
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              gap: '16px',
-              padding: '24px',
-              borderTop: '1px solid #E5E7EB',
-            }}
+        {!requireFooter && (
+          <AppBar
+            position="static"
+            sx={{ backgroundColor: '#fff', boxShadow: 'none' }}
           >
-            <Button
+            <Toolbar
               sx={{
-                color: theme.palette?.grey[500],
-                border: '1px solid #E5E7EB',
-                padding: '0px 22px',
-                height: '44px',
-                fontWeight: '500',
-                '&:hover': { bgcolor: theme.palette.grey[400] },
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: '16px',
+                padding: '24px',
+                borderTop: '1px solid #E5E7EB',
               }}
             >
-              Cancel
-            </Button>
-            {isOk && (
               <Button
-                variant="contained"
                 sx={{
+                  color: theme.palette?.grey[500],
+                  border: '1px solid #E5E7EB',
                   padding: '0px 22px',
                   height: '44px',
                   fontWeight: '500',
+                  '&:hover': { bgcolor: theme.palette.grey[400] },
                 }}
-                onClick={submitHandler}
               >
-                {okText}
+                Cancel
               </Button>
-            )}
-          </Toolbar>
-        </AppBar>
+              {isOk && (
+                <Button
+                  variant="contained"
+                  sx={{
+                    padding: '0px 22px',
+                    height: '44px',
+                    fontWeight: '500',
+                  }}
+                  onClick={submitHandler}
+                >
+                  {okText}
+                </Button>
+              )}
+            </Toolbar>
+          </AppBar>
+        )}
       </Box>
     </Drawer>
   );

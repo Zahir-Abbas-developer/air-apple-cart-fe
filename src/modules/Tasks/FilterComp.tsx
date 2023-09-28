@@ -1,13 +1,13 @@
 import React from 'react';
 import DrawerComp from './Drawer';
-// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { FilterIcon } from '@/assets/images';
 
 const FilterComp = () => {
   return (
     <DrawerComp
       btnTitle="Filter"
       title="Filter"
-      // btnIcon={<ArrowDropDownIcon />}
+      btnIcon={<FilterIcon />}
       key={'filter'}
     >
       <p>this is filter comp</p>

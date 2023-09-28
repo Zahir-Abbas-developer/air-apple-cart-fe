@@ -28,7 +28,6 @@ const ActionBtn = ({ onChange }: Props) => {
     <>
       <Button
         variant="outlined"
-        size="small"
         endIcon={<ArrowDropDownIcon />}
         onClick={handleClick}
       >
