@@ -1,49 +1,16 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 
 // ====================================
 import Link from 'next/link';
 
+// ====================================
 import { Button, Typography, Box } from '@mui/material';
 
 // ====================================
 import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
 
 // ====================================
-import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
-
-const avatarGroupMockData: IAVATARGROUPDATA[] = [
-  {
-    id: '01',
-    name: 'Ahsan',
-    img: '/avatar1.jpg',
-  },
-  {
-    id: '02',
-    name: 'Shehroz',
-    img: '/avatar2.jpg',
-  },
-  {
-    id: '03',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '04',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '05',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '06',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-];
+import { avatarGroupMockData } from './Plan-Management-Data';
 
 // ==================================================================================================================================
 
