@@ -1,7 +1,7 @@
 import React from 'react';
 
 // ====================================
-import SuperAdminLayout from '@/layouts/SuperAdminLayout';
+import Layout from '@/layouts/Layout';
 
 // ====================================
 import AddPlanModule from '@/modules/PlanManagement/AddPlan/AddPlan';
@@ -17,5 +17,5 @@ export default AddPlanPage;
 // ====================================
 
 AddPlanPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };
