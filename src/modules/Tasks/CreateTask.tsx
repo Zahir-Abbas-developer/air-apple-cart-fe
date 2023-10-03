@@ -12,7 +12,7 @@ const CreateTask = () => {
       btnVariant="contained"
       btnTitle="Create Task"
     >
-      <p>dasdlaskjdasd</p>
+      <div>dasdlaskjdasd</div>
     </DrawerComp>
   );
 };

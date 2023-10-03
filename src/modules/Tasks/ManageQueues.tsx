@@ -27,7 +27,7 @@ const ManageQueues = () => {
           </Button>
         </>
       ) : (
-        <p>edit Comrt</p>
+        <div>edit Comrt</div>
       )}
     </DrawerComp>
   );

@@ -4,11 +4,10 @@ import TabsComp from './Tabs';
 
 const TaskComp = () => {
   return (
-    <div>
+    <>
       <Header />
-      {/* <p>tab component here</p> */}
       <TabsComp />
-    </div>
+    </>
   );
 };
 

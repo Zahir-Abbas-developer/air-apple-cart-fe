@@ -1,5 +1,5 @@
+import SuperAdminLayout from '@/layouts/SuperAdminLayout';
 import TaskComp from '@/modules/Tasks';
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
 function SuperAdminReportsPage() {
   return <TaskComp />;
 }

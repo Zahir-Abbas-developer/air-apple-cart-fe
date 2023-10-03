@@ -11,7 +11,7 @@ const Import = () => {
       btnTitle="Import"
       btnIcon={<UmbrellaIcon />}
     >
-      <p>this is import</p>
+      <div>this is import</div>
     </DrawerComp>
   );
 };

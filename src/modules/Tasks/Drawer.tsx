@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import CommonDrawer from '@/components/Drawer';
 import { uuid } from 'uuidv4';
+import CommonDrawer from '@/components/CommonDrawer';
 
 const DrawerComp = ({
   title = 'title',
