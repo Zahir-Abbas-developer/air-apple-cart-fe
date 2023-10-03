@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const PlanFeatures = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
-  // const [showDetails, setShowDetails] = useState({});
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {

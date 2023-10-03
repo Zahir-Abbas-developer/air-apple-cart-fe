@@ -1,7 +1,5 @@
 import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
 
-// =========================================================================================================
-
 export const avatarGroupMockData: IAVATARGROUPDATA[] = [
   {
     id: '01',

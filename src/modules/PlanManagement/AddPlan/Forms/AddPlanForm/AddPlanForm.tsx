@@ -15,10 +15,7 @@ const AddPlanForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (values: any) => {
-    // eslint-disable-next-line no-console
-    console.log('Add Plan Values=======> ', values);
-  };
+  const onSubmit = () => {};
 
   return (
     <FormProvider>

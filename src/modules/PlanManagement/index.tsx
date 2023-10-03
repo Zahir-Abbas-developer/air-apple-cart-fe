@@ -1,18 +1,12 @@
 import React from 'react';
 
-// ====================================
 import Link from 'next/link';
 
-// ====================================
 import { Button, Typography, Box } from '@mui/material';
 
-// ====================================
 import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
 
-// ====================================
 import { avatarGroupMockData } from './Plan-Management-Data';
-
-// ==================================================================================================================================
 
 const PlanManagement = () => {
   return (

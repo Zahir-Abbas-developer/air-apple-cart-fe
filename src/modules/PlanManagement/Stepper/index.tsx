@@ -1,6 +1,5 @@
 import React from 'react';
 
-// =======================================
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -11,16 +10,12 @@ import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector';
 
-// =======================================
 import Check from '@mui/icons-material/Check';
 
-// =======================================
 import { v4 as uuidv4 } from 'uuid';
 
-// =======================================
 import { AppHorizontalStepperProps } from './stepper.types';
 
-// ==========================================================================
 const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
   stepsArray,
   // TODO: Handling form actions
@@ -81,10 +76,7 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
       </Stepper>
 
       <Box sx={{ width: '100%', padding: stepperPadding }}>
-        {/* =========================================== */}
         {Boolean(stepsArray?.length) && stepsArray[activeStep]?.component}
-
-        {/* =========================================== */}
         <React.Fragment>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
@@ -111,10 +103,6 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
 
 export default AppHorizontalStepper;
 
-// ==========================================================================================================
-
-// ==========================================================================
-// Custom Stepper Icon Component
 function CustomStepIcon(props: any) {
   const { active, completed, className } = props;
   const theme = useTheme();
@@ -137,7 +125,6 @@ function CustomStepIcon(props: any) {
   );
 }
 
-// ==========================================================================
 const CustomStepIconRoot = styled('div')<{
   ownerState: { active?: boolean };
   theme: any;
@@ -162,7 +149,6 @@ const CustomStepIconRoot = styled('div')<{
   },
 }));
 
-// ==========================================================================
 const CustomConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,

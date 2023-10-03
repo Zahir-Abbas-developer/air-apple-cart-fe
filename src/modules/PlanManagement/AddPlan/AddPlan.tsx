@@ -1,22 +1,16 @@
 import React from 'react';
 
-// =======================================
 import Link from 'next/link';
 
-// =======================================
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-// =======================================
 import useAddPlan from './useAppPlan';
 
-// =======================================
 import { ArrowLeftIcon } from '@/assets/icons';
 
-// =======================================
 import AppHorizontalStepper from '../Stepper';
 
-// =============================================================================================================================
 const AddPlan = () => {
   const { addPlanFormValues, setAddPlanFormValues, AddPlanStepperData } =
     useAddPlan();

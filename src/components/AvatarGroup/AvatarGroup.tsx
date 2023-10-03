@@ -6,8 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
 
-// ======================================================================================================
-
 const AppAvatarGroup = ({ data }: { data: IAVATARGROUPDATA[] }) => {
   const theme = useTheme();
 
