@@ -8,4 +8,6 @@ export interface AppHorizontalStepperProps {
   addPlanFormValues: any;
   setAddPlanFormValues: React.Dispatch<React.SetStateAction<any>>;
   disableNextButton?: boolean;
+  stepperPadding?: string;
+  stepperMargin?: string;
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 // =======================================
-import AddPlanForm from './Forms/AddPlanForm';
-import PlanFeaturesForm from './Forms/PlanFeaturesForm';
+import AddPlanForm from './Forms/AddPlanForm/AddPlanForm';
+import PlanFeaturesForm from './Forms/PlanFeatures';
 import ModulesForm from './Forms/ModulesForm';
 
 // =======================================

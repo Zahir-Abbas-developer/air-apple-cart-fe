@@ -14,7 +14,7 @@ import { avatarGroupMockData } from './Plan-Management-Data';
 
 // ==================================================================================================================================
 
-const PlanManagementModule = () => {
+const PlanManagement = () => {
   return (
     <div>
       <Box
@@ -45,7 +45,7 @@ const PlanManagementModule = () => {
   );
 };
 
-export default PlanManagementModule;
+export default PlanManagement;
 
 // ==================================================================================================================================
 const styles = {

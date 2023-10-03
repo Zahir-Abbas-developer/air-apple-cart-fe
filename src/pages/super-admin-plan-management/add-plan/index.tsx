@@ -1,13 +1,10 @@
 import React from 'react';
 
 // ====================================
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+import SuperAdminLayout from '@/layouts/SuperAdminLayout';
 
 // ====================================
 import AddPlanModule from '@/modules/PlanManagement/AddPlan/AddPlan';
-
-// ====================================
-// import { ArrowLeftIcon } from '@/assets/icons';
 
 // ==================================================================================================================================
 

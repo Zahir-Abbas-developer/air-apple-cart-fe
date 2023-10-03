@@ -27,6 +27,8 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
   // addPlanFormValues,
   // setAddPlanFormValues,
   disableNextButton,
+  stepperPadding = '4rem 0',
+  stepperMargin = '2rem 0',
 }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const theme = useTheme();
@@ -47,7 +49,7 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', margin: stepperMargin }}>
       <Stepper
         alternativeLabel
         activeStep={activeStep}
@@ -78,7 +80,7 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
           ))}
       </Stepper>
 
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', padding: stepperPadding }}>
         {/* =========================================== */}
         {Boolean(stepsArray?.length) && stepsArray[activeStep]?.component}
 

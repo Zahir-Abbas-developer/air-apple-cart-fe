@@ -17,7 +17,7 @@ import { ArrowLeftIcon } from '@/assets/icons';
 import AppHorizontalStepper from '../Stepper';
 
 // =============================================================================================================================
-const AddPlanModule = () => {
+const AddPlan = () => {
   const { addPlanFormValues, setAddPlanFormValues, AddPlanStepperData } =
     useAddPlan();
   return (
@@ -37,4 +37,4 @@ const AddPlanModule = () => {
   );
 };
 
-export default AddPlanModule;
+export default AddPlan;
