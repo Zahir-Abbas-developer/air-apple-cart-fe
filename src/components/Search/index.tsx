@@ -1,12 +1,21 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+
+import { TextField, InputAdornment } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import { debouncedSearch } from '@/utils';
-import { useTheme } from '@mui/material';
+
 import { SearchPropsI } from '@/types/shared/Search';
+
 import SearchSharedIcon from '@/assets/icons/shared/search-shared';
 
-const Search = ({ label, width, searchBy, setSearchBy }: SearchPropsI) => {
+const Search = ({
+  label,
+  width,
+  searchBy,
+  setSearchBy,
+  ...rest
+}: SearchPropsI) => {
   const theme = useTheme();
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchBy(e.target.value);
@@ -22,7 +31,7 @@ const Search = ({ label, width, searchBy, setSearchBy }: SearchPropsI) => {
         '& .MuiOutlinedInput-root ': {
           '& fieldset': {
             textAlign: 'right',
-            borderColor: '#E5E7EB',
+            borderColor: theme?.palette?.grey[700],
             width: width,
             borderRadius: '8px',
             '@media (max-width: 600px)': {
@@ -33,10 +42,10 @@ const Search = ({ label, width, searchBy, setSearchBy }: SearchPropsI) => {
             borderColor: theme?.palette?.primary?.main,
           },
           '& .MuiInputBase-input': {
-            color: 'black',
+            color: theme?.palette?.common?.black,
           },
           '&.Mui-focused fieldset': {
-            borderColor: '#E5E7EB',
+            borderColor: theme?.palette?.grey[700],
           },
         },
       }}
@@ -51,6 +60,7 @@ const Search = ({ label, width, searchBy, setSearchBy }: SearchPropsI) => {
           </InputAdornment>
         ),
       }}
+      {...rest}
     />
   );
 };
