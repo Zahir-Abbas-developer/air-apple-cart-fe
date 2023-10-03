@@ -1,4 +1,4 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout';
+import Layout from '@/layouts/Layout';
 
 // ====================================
 import PlanManagementModule from '@/modules/PlanManagement';
@@ -13,5 +13,5 @@ export default SuperAdminPlanManagementPage;
 
 // ====================================
 SuperAdminPlanManagementPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };
