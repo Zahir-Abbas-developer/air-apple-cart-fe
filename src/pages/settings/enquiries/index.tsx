@@ -1,4 +1,4 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+import SuperAdminLayout from '@/layouts/SuperAdminLayout';
 import Enquiries from '@/modules/settings/Enquiries';
 
 const EnquiriesPage = () => {

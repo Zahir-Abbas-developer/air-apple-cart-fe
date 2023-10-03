@@ -1,4 +1,4 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+import SuperAdminLayout from '@/layouts/SuperAdminLayout';
 import TaxCalculation from '@/modules/settings/TaxCalculations';
 const TaxCalculationPage = () => {
   return <TaxCalculation />;

@@ -1,5 +1,5 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
-import Faqs from '@/modules/settings/Faqs';
+import SuperAdminLayout from '@/layouts/SuperAdminLayout';
+import Faqs from '@/modules/Settings/Faqs';
 const FaqsPage = () => {
   return <Faqs />;
 };
