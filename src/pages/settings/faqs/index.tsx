@@ -1,9 +1,9 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout';
+import Layout from '@/layouts/Layout';
 import Faqs from '@/modules/Settings/Faqs';
 const FaqsPage = () => {
   return <Faqs />;
 };
 export default FaqsPage;
 FaqsPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };

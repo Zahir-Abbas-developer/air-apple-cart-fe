@@ -1,9 +1,9 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+import Layout from '@/layouts/Layout';
 import NewsAndEvents from '@/modules/settings/NewsAndEvents';
 const NewsAndEventsPage = () => {
   return <NewsAndEvents />;
 };
 export default NewsAndEventsPage;
 NewsAndEventsPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };

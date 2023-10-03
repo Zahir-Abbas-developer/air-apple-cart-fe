@@ -1,9 +1,9 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout';
+import Layout from '@/layouts/Layout';
 import QuickLinks from '@/modules/settings/QuickLinks';
 const QuickLinksPage = () => {
   return <QuickLinks />;
 };
 export default QuickLinksPage;
 QuickLinksPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };
