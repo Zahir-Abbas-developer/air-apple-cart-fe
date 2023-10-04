@@ -1,62 +1,33 @@
 import React from 'react';
 
-import { Button, Typography, Box } from '@mui/material';
-
-// ============== Components ==============
-import AppAvatarGroup from './AvatarGroup/AvatarGroup';
-
-// ====================================
-import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
 import Link from 'next/link';
 
-// ====================================
+import { Button, Typography, Box } from '@mui/material';
 
-const avatarGroupMockData: IAVATARGROUPDATA[] = [
-  {
-    id: '01',
-    name: 'Ahsan',
-    img: '/avatar1.jpg',
-  },
-  {
-    id: '02',
-    name: 'Shehroz',
-    img: '/avatar2.jpg',
-  },
-  {
-    id: '03',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '04',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '05',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-  {
-    id: '06',
-    name: 'Waseeem',
-    img: '/avatar3.jpg',
-  },
-];
+import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
 
-// =======================================================================================================================
+import { avatarGroupMockData } from './Plan-Management-Data';
 
-const PlanManagementModule = () => {
+const PlanManagement = () => {
   return (
     <div>
-      <Box display={'flex'} justifyContent={'space-between'}>
+      <Box
+        display={'flex'}
+        justifyContent={'space-between'}
+        flexWrap={'wrap'}
+        gap={1}
+      >
         <Typography variant="h4" sx={styles.planManagementHeading}>
           Plan Management
         </Typography>
 
-        <Link href={'/super-admin-plan-management/add-plan'}>
-          <Button variant="contained">Add Plan</Button>
-        </Link>
+        <Box sx={styles.linkStyle}>
+          <Link href={'/super-admin-plan-management/add-plan'}>
+            <Button variant="contained" fullWidth>
+              Add Plan
+            </Button>
+          </Link>
+        </Box>
       </Box>
 
       <br />
@@ -68,12 +39,18 @@ const PlanManagementModule = () => {
   );
 };
 
-export default PlanManagementModule;
+export default PlanManagement;
 
+// ==================================================================================================================================
 const styles = {
   planManagementHeading: {
     fontWeight: 600,
     lineHeight: '30px',
     letterSpacing: '-2%',
+  },
+  linkStyle: {
+    '@media (max-width: 400px)': {
+      width: '100%',
+    },
   },
 };

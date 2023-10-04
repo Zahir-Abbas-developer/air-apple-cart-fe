@@ -1,9 +1,13 @@
 import Layout from '@/layout';
 
-const PlanManagementPage = () => {
-  return <div>Plan Management Page</div>;
+import PlanManagementModule from '@/modules/PlanManagement';
+
+const SuperAdminPlanManagementPage = () => {
+  return <PlanManagementModule />;
 };
-export default PlanManagementPage;
-PlanManagementPage.getLayout = function getLayout(page: any) {
+
+export default SuperAdminPlanManagementPage;
+
+SuperAdminPlanManagementPage.getLayout = function getLayout(page: any) {
   return <Layout>{page}</Layout>;
 };
