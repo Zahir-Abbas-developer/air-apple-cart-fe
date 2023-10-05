@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Checkbox } from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
@@ -11,6 +13,61 @@ const PlanTypeCreation = () => {
   const [isPlanTypeCreationDrawer, setIsPlanTypeCreationDrawer] =
     useState(false);
   const [planTypeCreationSearch, setPlanTypeCreationSearch] = useState('');
+
+  const data: any = [
+    {
+      id: 1,
+      planTypeName: 'React JS Developer',
+      description: 'We are looking for  a ...',
+      createdBy: 'Arlene McCoy',
+      createdDate: '10/04/2023',
+      status: 'open',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.planTypeName,
+      id: 'planTypeName',
+      cell: (info: any) => info.getValue(),
+      header: 'Plan Type Name',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.description,
+      id: 'description',
+      isSortable: true,
+      header: 'Discription',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdBy,
+      id: 'createdBy',
+      isSortable: true,
+      header: 'Created By',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdDate,
+      id: 'createdDate',
+      isSortable: true,
+      header: 'Created Date',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.status,
+      id: 'status',
+      isSortable: true,
+      header: 'Status',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
 
   return (
     <Box
@@ -63,6 +120,14 @@ const PlanTypeCreation = () => {
             <PlusShared /> &nbsp; Add Plan Type
           </Button>
         </Box>
+      </Box>
+      <Box>
+        <TanstackTable columns={columns} data={data} />
+        <CustomPagination
+          count={1}
+          rowsPerPageOptions={[1, 2]}
+          entriePages={1}
+        />
       </Box>
       <CommonDrawer
         isDrawerOpen={isPlanTypeCreationDrawer}

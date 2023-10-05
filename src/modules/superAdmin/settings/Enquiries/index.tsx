@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Checkbox, Typography, useTheme } from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 
@@ -14,6 +16,69 @@ const Enquiries = () => {
   const [isEnquiriesFilterDrawerOpen, setIsEnquiriesFilterDrawerOpen] =
     useState(false);
   const [faqsSearch, setFaqsSearch] = useState('');
+
+  const data: any = [
+    {
+      id: 1,
+      name: 'John Doe',
+      companyName: 'Orcalo Holdings',
+      email: 'jhon.doe@mail.com',
+      phoneNumber: '447788921',
+      comments: 'Looking for your sale product',
+      status: 'done',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.name,
+      id: 'name',
+      cell: (info: any) => info.getValue(),
+      header: 'Name',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.companyName,
+      id: 'companyName',
+      isSortable: true,
+      header: 'Company Name',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.email,
+      id: 'email',
+      isSortable: true,
+      header: 'Email',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.phoneNumber,
+      id: 'phoneNumber',
+      isSortable: true,
+      header: 'Phone Number',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.comments,
+      id: 'comments',
+      isSortable: true,
+      header: 'Comments',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.status,
+      id: 'status',
+      isSortable: true,
+      header: 'Status',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
 
   return (
     <Box
@@ -69,6 +134,14 @@ const Enquiries = () => {
           </Button>
         </Box>
       </Box>
+      <Box>
+        <TanstackTable columns={columns} data={data} />
+        <CustomPagination
+          count={1}
+          rowsPerPageOptions={[1, 2]}
+          entriePages={1}
+        />
+      </Box>
       <CommonDrawer
         isDrawerOpen={isEnquiriesFilterDrawerOpen}
         onClose={() => setIsEnquiriesFilterDrawerOpen(false)}
@@ -77,7 +150,9 @@ const Enquiries = () => {
         isOk={true}
         footer={true}
         submitHandler={() => setIsEnquiriesFilterDrawerOpen(false)}
-      />
+      >
+        Filters
+      </CommonDrawer>
     </Box>
   );
 };

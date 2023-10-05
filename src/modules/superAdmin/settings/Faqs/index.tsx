@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Checkbox, Typography, useTheme } from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 import PlusShared from '@/assets/icons/shared/plus-shared';
@@ -14,6 +16,62 @@ const Faqs = () => {
   const theme = useTheme();
   const [isFaqsFilterDrawerOpen, setIsFaqsFilterDrawerOpen] = useState(false);
   const [faqsSearch, setFaqsSearch] = useState('');
+
+  const data: any = [
+    {
+      id: 1,
+      question: 'What is React JS Developer ?',
+      faqCategory: 'Marketing',
+      answer:
+        'JSX stands for JavaScript XML. JSX is an XML/HTML like extension to JavaScript.',
+      createdBy: 'Arlene McCoy',
+      createdDate: '10/04/2023',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.question,
+      id: 'question',
+      cell: (info: any) => info.getValue(),
+      header: 'Question',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.faqCategory,
+      id: 'faqCategory',
+      isSortable: true,
+      header: 'FAQ Category',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.answer,
+      id: 'answer',
+      isSortable: true,
+      header: 'Answer',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdBy,
+      id: 'createdBy',
+      isSortable: true,
+      header: 'Created By',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdDate,
+      id: 'createdDate',
+      isSortable: true,
+      header: 'Created Date',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
 
   return (
     <Box
@@ -70,6 +128,14 @@ const Faqs = () => {
             <FilterSharedIcon /> &nbsp; Filter
           </Button>
         </Box>
+      </Box>
+      <Box>
+        <TanstackTable columns={columns} data={data} />
+        <CustomPagination
+          count={1}
+          rowsPerPageOptions={[1, 2]}
+          entriePages={1}
+        />
       </Box>
       <CommonDrawer
         isDrawerOpen={isFaqsFilterDrawerOpen}

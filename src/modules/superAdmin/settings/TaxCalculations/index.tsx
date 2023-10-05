@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Checkbox, Typography, useTheme } from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 import PlusShared from '@/assets/icons/shared/plus-shared';
@@ -19,6 +21,69 @@ const TaxCalculation = () => {
   const [isTaxCalculationDrawerOpen, setIsTaxCalculationDrawerOpen] =
     useState(false);
   const [taxCalculationSearch, setTaxCalculationSearch] = useState('');
+
+  const data: any = [
+    {
+      id: 1,
+      taxName: 'VAT',
+      taxPercentage: '20 %',
+      description: 'This is valued added tax for ....',
+      createDate: '12-May-2023',
+      activeModule: ['invoce form', 'add product form', 'Subscription'],
+      status: 'active',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.taxName,
+      id: 'taxName',
+      cell: (info: any) => info.getValue(),
+      header: 'Tax Name',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.taxPercentage,
+      id: 'taxPercentage',
+      isSortable: true,
+      header: 'tax Percentage',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.description,
+      id: 'description',
+      isSortable: true,
+      header: 'Description',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createDate,
+      id: 'createDate',
+      isSortable: true,
+      header: 'Create Date',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.activeModule,
+      id: 'activeModule',
+      isSortable: true,
+      header: 'Active Module',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.status,
+      id: 'status',
+      isSortable: true,
+      header: 'Status',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
 
   return (
     <Box
@@ -80,6 +145,16 @@ const TaxCalculation = () => {
           </Button>
         </Box>
       </Box>
+
+      <Box>
+        <TanstackTable columns={columns} data={data} />
+        <CustomPagination
+          count={1}
+          rowsPerPageOptions={[1, 2]}
+          entriePages={1}
+        />
+      </Box>
+
       <CommonDrawer
         isDrawerOpen={isTaxCalculationFilterDrawerOpen}
         onClose={() => setIsTaxCalculationFilterDrawerOpen(false)}

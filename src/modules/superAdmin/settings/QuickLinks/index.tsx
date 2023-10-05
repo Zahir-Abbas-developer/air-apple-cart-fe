@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Grid, Switch, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Grid,
+  Switch,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
 import { isNullOrEmpty } from '@/utils';
 
@@ -24,9 +34,57 @@ const QuickLinks = () => {
   const [isQuickLinksFilterDrawerOpen, setIsQuickLinksFilterDrawerOpen] =
     useState(false);
   const [quickLinksSearch, setQuickLinksSearch] = useState('');
-  const [isManageQuickLinks, setIsManageQuickLinks] = useState<boolean>(true);
+  const [isManageQuickLinks, setIsManageQuickLinks] = useState<boolean>(false);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+  const data: any = [
+    {
+      id: 1,
+      product: 'sales',
+      moduleName: 'deals',
+      createdDate: '12-july-2023',
+      url: 'https://www.airapplecart.co.uk',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.product,
+      id: 'product',
+      cell: (info: any) => info.getValue(),
+      header: 'Product',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.moduleName,
+      id: 'moduleName',
+      isSortable: true,
+      header: 'Module/Sub Module Name',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdDate,
+      id: 'createdDate',
+      isSortable: true,
+      header: 'Created at',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.url,
+      id: 'url',
+      isSortable: true,
+      header: 'URL',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
+
   return (
     <>
       {!isManageQuickLinks ? (
@@ -89,6 +147,14 @@ const QuickLinks = () => {
                 <FilterSharedIcon /> &nbsp; Filter
               </Button>
             </Box>
+          </Box>
+          <Box>
+            <TanstackTable columns={columns} data={data} />
+            <CustomPagination
+              count={1}
+              rowsPerPageOptions={[1, 2]}
+              entriePages={1}
+            />
           </Box>
           <CommonDrawer
             isDrawerOpen={isQuickLinksFilterDrawerOpen}

@@ -1,45 +1,117 @@
 import React, { useState } from 'react';
 
-import { Box, TextField, useTheme, Typography, Button } from '@mui/material';
+import { Box, useTheme, Button, Checkbox, Grid } from '@mui/material';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
 
 import CommonDrawer from '@/components/CommonDrawer';
-import SearchableSelect from '@/components/SearchableSelect';
-import TextEditor from '@/components/TextEditor';
 import Search from '@/components/Search';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import CustomPagination from '@/components/CustomPagination';
 
-import { candidatesArray } from '@/mock/modules/Settings/Jobs';
+import { FormProvider } from '@/components/ReactHookForm';
 
 import { JobPostingPropsI } from './JobPostingProps.interface';
 
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 
 import { styles } from './Jobs.styles';
+import {
+  jobPostingDataArray,
+  jobPostingDefaultValues,
+  jobPostingValidationSchema,
+} from './jobPosting.data';
 
 const JobPosting = ({
   isJobPostingDrawer,
   setIsJobPostingDrawer,
 }: JobPostingPropsI) => {
+  const data: any = [
+    {
+      id: 1,
+      jobTitle: 'React JS Developer',
+      shortDescription: 'We are looking for  a ...',
+      category: 'Marketing',
+      noOfVacancy: '1',
+      createdBy: 'Arlene McCoy',
+      createdDate: '10/04/2023',
+      status: 'open',
+    },
+  ];
+  const columns: any = [
+    {
+      accessorFn: (row: any) => row.id,
+      id: 'id',
+      cell: (info: any) => <Checkbox color="primary" name={info.getValue()} />,
+      header: <Checkbox color="primary" name="Id" />,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.jobTitle,
+      id: 'jobTitle',
+      cell: (info: any) => info.getValue(),
+      header: 'Job Title',
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.shortDescription,
+      id: 'shortDescription',
+      isSortable: true,
+      header: 'Short Discription',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.category,
+      id: 'category',
+      isSortable: true,
+      header: 'Category',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.noOfVacancy,
+      id: 'noOfVacancy',
+      isSortable: true,
+      header: 'No ofVacency',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdBy,
+      id: 'createdBy',
+      isSortable: true,
+      header: 'Created By',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.createdDate,
+      id: 'createdDate',
+      isSortable: true,
+      header: 'Created date',
+      cell: (info: any) => info.getValue(),
+    },
+    {
+      accessorFn: (row: any) => row.status,
+      id: 'status',
+      isSortable: true,
+      header: 'Status',
+      cell: (info: any) => info.getValue(),
+    },
+  ];
+
   const theme = useTheme();
-  const [editorValue, setEditorValue] = useState<string>('');
   const [jobPostingSearch, setJobPostingSearch] = useState<string>('');
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+
+  const methodsCreateNewTicketForm = useForm({
+    resolver: yupResolver(jobPostingValidationSchema),
+    defaultValues: jobPostingDefaultValues,
+  });
 
   const onSubmit = () => {
     setIsJobPostingDrawer(false);
   };
-  const renderCustomOption = (option: any) => {
-    return (
-      <Typography variant="h6" sx={{ color: theme?.palette.grey[600] }}>
-        {option.label} {option.name}
-      </Typography>
-    );
-  };
+  const { handleSubmit } = methodsCreateNewTicketForm;
 
   return (
     <Box>
@@ -74,14 +146,13 @@ const JobPosting = ({
           </Button>
         </Box>
       </Box>
-      <Box
-        sx={{
-          backgroundColor: '#ececec73',
-          height: '300px',
-          borderRadius: '15px',
-        }}
-      >
-        Common table
+      <Box>
+        <TanstackTable columns={columns} data={data} />
+        <CustomPagination
+          count={1}
+          rowsPerPageOptions={[1, 2]}
+          entriePages={1}
+        />
       </Box>
       <CommonDrawer
         isDrawerOpen={isJobPostingDrawer}
@@ -93,48 +164,26 @@ const JobPosting = ({
         submitHandler={handleSubmit(onSubmit)}
       >
         <>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-              name="name"
-              control={control}
-              rules={{ required: 'Name is required' }}
-              render={({ field }) => (
-                <>
-                  <Typography
-                    variant="h6"
-                    mt={1}
-                    style={{ color: theme?.palette.grey[600] }}
-                  >
-                    Job Post
-                  </Typography>
-                  <TextField
-                    label=""
-                    fullWidth
-                    placeholder="Type here"
-                    variant="outlined"
-                    error={!!errors.name}
-                    helperText={errors.name?.message}
-                    {...field}
-                  />
-                </>
-              )}
-            />
-
-            <SearchableSelect
-              dropdownData={candidatesArray}
-              renderOption={renderCustomOption}
-              name="Search candidate"
-              label="Candidate"
-              control={control}
-              rules={{ required: 'required field' }}
-              error={!!errors.message}
-              multiple={true}
-            />
-            <br />
-            <TextEditor value={editorValue} onChange={setEditorValue} />
-
-            {/* <Button type="submit">sss</Button> */}
-          </form>
+          <FormProvider
+            methods={methodsCreateNewTicketForm}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {jobPostingDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
         </>
       </CommonDrawer>
     </Box>
