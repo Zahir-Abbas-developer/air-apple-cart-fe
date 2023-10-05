@@ -10,7 +10,19 @@ export const styles = {
     boxShadow:
       '0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08)',
   },
-  textareaSearchDropdown: (width: string, height: string) => {
+  renderText: {
+    width: '90%',
+    height: '35px',
+    position: 'absolute',
+    left: '1px',
+    top: '5px',
+    background: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0px 10px',
+    overflow: 'hidden',
+  },
+  textareaSearchDropdown: (height: string) => {
     return {
       '& div': {
         border: 'none',

@@ -33,7 +33,6 @@ const JobPosting = ({
   const onSubmit = () => {
     setIsJobPostingDrawer(false);
   };
-
   const renderCustomOption = (option: any) => {
     return (
       <Typography variant="h6" sx={{ color: theme?.palette.grey[600] }}>
@@ -58,6 +57,7 @@ const JobPosting = ({
           searchBy={jobPostingSearch}
           setSearchBy={setJobPostingSearch}
           width="100%"
+          size="small"
         />
         <Box
           sx={{
@@ -128,8 +128,12 @@ const JobPosting = ({
               control={control}
               rules={{ required: 'required field' }}
               error={!!errors.message}
+              multiple={true}
             />
+            <br />
             <TextEditor value={editorValue} onChange={setEditorValue} />
+
+            {/* <Button type="submit">sss</Button> */}
           </form>
         </>
       </CommonDrawer>

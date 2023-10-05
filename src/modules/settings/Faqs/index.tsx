@@ -79,7 +79,9 @@ const Faqs = () => {
         isOk={true}
         footer={true}
         submitHandler={() => setIsFaqsFilterDrawerOpen(false)}
-      />
+      >
+        <p>ssdsd</p>
+      </CommonDrawer>
     </Box>
   );
 };

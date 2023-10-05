@@ -49,6 +49,7 @@ const Enquiries = () => {
           searchBy={faqsSearch}
           setSearchBy={setFaqsSearch}
           width="100%"
+          size="small"
         />
         <Box
           sx={{
