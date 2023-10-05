@@ -1,21 +1,22 @@
 import React from 'react';
 
-import { TextField, InputAdornment } from '@mui/material';
+import { TextField, InputAdornment, TextFieldProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { debouncedSearch } from '@/utils';
 
-import { SearchPropsI } from '@/types/shared/Search';
+import { SearchPropsI } from './Search.interface';
 
 import SearchSharedIcon from '@/assets/icons/shared/search-shared';
 
+type CombinedProps = TextFieldProps & SearchPropsI;
 const Search = ({
   label,
   width,
   searchBy,
   setSearchBy,
   ...rest
-}: SearchPropsI) => {
+}: CombinedProps) => {
   const theme = useTheme();
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchBy(e.target.value);
@@ -35,11 +36,12 @@ const Search = ({
             width: width,
             borderRadius: '8px',
             '@media (max-width: 600px)': {
-              width: '100%', // Adjust the width for smaller screens
+              width: '100%',
             },
           },
           '&:hover fieldset': {
-            borderColor: theme?.palette?.primary?.main,
+            borderColor: theme?.palette?.custom?.light_green,
+            boxShadow: `0px 0px 0px 3px ${theme?.palette?.custom?.aqua_breeze}`,
           },
           '& .MuiInputBase-input': {
             color: theme?.palette?.common?.black,
@@ -53,6 +55,7 @@ const Search = ({
       placeholder={label}
       variant="outlined"
       autoComplete="off"
+      {...rest}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

@@ -1,38 +1,31 @@
 import React from 'react';
-import Drawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import {
+  Drawer,
+  Box,
+  Button,
+  Container,
+  AppBar,
+  Toolbar,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { CommonDrawerPropsI } from '@/types/shared/Drawer';
 import CloseIcon from '@/assets/icons/shared/close-icon';
 
 const CommonDrawer = ({
   isDrawerOpen,
-  setIsDrawerOpen,
+  onClose,
   children,
   title,
   okText,
   submitHandler,
   isOk,
-  requireFooter,
+  cancelText,
+  footer,
 }: CommonDrawerPropsI) => {
   const theme = useTheme();
   return (
-    <Drawer
-      open={isDrawerOpen}
-      onClose={() => setIsDrawerOpen(false)}
-      anchor="right"
-      sx={{
-        '& .css-yaabfu-MuiPaper-root-MuiDrawer-paper': {
-          borderRadius: '30px 0px 0px 30px !important',
-          color: 'black',
-        },
-      }}
-    >
+    <Drawer open={isDrawerOpen} onClose={onClose} anchor="right">
       <Box
         display="flex"
         flexDirection="column"
@@ -53,18 +46,16 @@ const CommonDrawer = ({
             }}
           >
             <Typography variant="h5">{title}</Typography>
-            <Box onClick={() => setIsDrawerOpen(false)}>
+            <Box onClick={onClose}>
               <CloseIcon />
             </Box>
           </Toolbar>
         </AppBar>
         <Box flex="1" overflow="scroll">
-          <Container>
-            <p>{children}</p>
-          </Container>
+          <Container>{children}</Container>
         </Box>
-        {!requireFooter && (
-          <AppBar
+        {footer && (
+          <Box
             position="static"
             sx={{ backgroundColor: '#fff', boxShadow: 'none' }}
           >
@@ -87,8 +78,9 @@ const CommonDrawer = ({
                   fontWeight: '500',
                   '&:hover': { bgcolor: theme.palette.grey[400] },
                 }}
+                onClick={onClose}
               >
-                Cancel
+                {cancelText ? cancelText : 'Cancel'}
               </Button>
               {isOk && (
                 <Button
@@ -99,12 +91,13 @@ const CommonDrawer = ({
                     fontWeight: '500',
                   }}
                   onClick={submitHandler}
+                  type="submit"
                 >
                   {okText}
                 </Button>
               )}
             </Toolbar>
-          </AppBar>
+          </Box>
         )}
       </Box>
     </Drawer>
