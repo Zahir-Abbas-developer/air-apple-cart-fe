@@ -1,6 +1,6 @@
 import React from 'react';
-import CustomizeColumns from './Deals/CustomizeColumns/CustomizeColumns';
-import DealsBar from './Deals/DealsBar/DealsBar';
+import CustomizeColumns from './Deals/ImportColumn/ImportColumn';
+import DealsBar from './Deals/DealsBar';
 
 const SalesDeals = () => {
   return (

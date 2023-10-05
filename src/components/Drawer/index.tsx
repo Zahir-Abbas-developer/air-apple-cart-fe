@@ -58,9 +58,7 @@ const CommonDrawer = ({
           </Toolbar>
         </AppBar>
         <Box flex="1" overflow="scroll">
-          <Container>
-            <p>{children}</p>
-          </Container>
+          <Container>{children}</Container>
         </Box>
         <AppBar
           position="static"

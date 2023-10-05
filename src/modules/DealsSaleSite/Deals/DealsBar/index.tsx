@@ -1,9 +1,15 @@
+import React, { useState } from 'react';
 import { DealsMenu, Umbrella } from '@/assets/icons';
 import { Typography, Box, Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import DelasTable from '../DelasTable';
+import CustomizeColumns from '../ImportColumn/ImportColumn';
+import CreateDeals from '../CreateDeal';
 
 const DealsBar = () => {
+  const [IsImportDetails, setIsImportDetails] = useState(false);
+  const [editorValue, setEditorValue] = useState<string>('');
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   return (
     <>
       <Box
@@ -21,7 +27,6 @@ const DealsBar = () => {
         >
           <DealsMenu /> Deals
         </Typography>
-
         <Box
           sx={{
             display: 'flex',
@@ -30,16 +35,34 @@ const DealsBar = () => {
             alignItems: 'center',
           }}
         >
-          <Button variant="outlined" sx={{ gap: '8px' }}>
+          <Button
+            onClick={() => setIsImportDetails(true)}
+            variant="outlined"
+            sx={{ gap: '8px' }}
+          >
             <Umbrella /> Import
           </Button>
-          <Button variant="contained" sx={{ gap: '8px' }}>
+
+          <Button
+            onClick={() => setIsCreateOpen(true)}
+            variant="contained"
+            sx={{ gap: '8px' }}
+          >
             {' '}
             <AddCircleIcon /> Create Deal
           </Button>
         </Box>
       </Box>
-      <DelasTable />
+      <CustomizeColumns
+        setEditorValue={setEditorValue}
+        editorValue={editorValue}
+        setIsImportDetails={setIsImportDetails}
+        IsImportDetails={IsImportDetails}
+      />
+      <CreateDeals
+        setIsCreateOpen={setIsCreateOpen}
+        isCreateOpen={isCreateOpen}
+      />
     </>
   );
 };
