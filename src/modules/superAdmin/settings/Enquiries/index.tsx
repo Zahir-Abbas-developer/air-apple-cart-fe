@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Checkbox, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Typography,
+  useTheme,
+  Grid,
+} from '@mui/material';
+
+import { FormProvider } from '@/components/ReactHookForm';
+import { useForm } from 'react-hook-form';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
+
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 
 import { styles } from './Enquiries.styles';
+import {
+  enquiriesFiltersDefaultValues,
+  enquiriesFiltersFiltersDataArray,
+  enquiriesFiltersValidationSchema,
+} from './Enquiries.data';
 
 const Enquiries = () => {
   const theme = useTheme();
@@ -79,6 +97,16 @@ const Enquiries = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsEnquiriesFilters = useForm({
+    resolver: yupResolver(enquiriesFiltersValidationSchema),
+    defaultValues: enquiriesFiltersDefaultValues,
+  });
+
+  const onSubmit = () => {
+    setIsEnquiriesFilterDrawerOpen(false);
+  };
+  const { handleSubmit } = methodsEnquiriesFilters;
 
   return (
     <Box
@@ -151,7 +179,28 @@ const Enquiries = () => {
         footer={true}
         submitHandler={() => setIsEnquiriesFilterDrawerOpen(false)}
       >
-        Filters
+        <>
+          <FormProvider
+            methods={methodsEnquiriesFilters}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {enquiriesFiltersFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
     </Box>
   );

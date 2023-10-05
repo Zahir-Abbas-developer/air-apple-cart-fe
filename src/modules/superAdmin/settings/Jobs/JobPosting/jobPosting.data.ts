@@ -5,7 +5,6 @@ import {
   RHFTextField,
 } from '@/components/ReactHookForm';
 import * as Yup from 'yup';
-Yup.string().trim().required('Field is Required');
 export const jobPostingValidationSchema = Yup.object().shape({
   jobTitle: Yup.string().trim().required('Field is Required'),
   JobType: Yup.string().trim().required('Field is Required'),
@@ -102,6 +101,82 @@ export const jobPostingDataArray = [
       fullWidth: true,
     },
     component: RHFEditor,
+    md: 12,
+  },
+];
+// Filters Data
+
+export const jobPostingFiltersValidationSchema = Yup.object().shape({
+  jobTitle: Yup.string().trim().required('Field is Required'),
+  JobType: Yup.string().trim().required('Field is Required'),
+  dummy: Yup.string().trim().required('Field is Required'),
+  experienceLevel: Yup.string().trim().required('Field is Required'),
+  numberOfVacency: Yup.string().trim().required('Field is Required'),
+  applicationDedlineDates: Yup.string().trim().required('Field is Required'),
+  jobDiscription: Yup.string().trim().required('Field is Required'),
+});
+
+export const jobPostingFiltersDefaultValues = {
+  jobTitle: '',
+  JobType: '',
+  dummy: '',
+  experienceLevel: '',
+  numberOfVacency: '',
+  applicationDedlineDates: '',
+  jobDiscription: '',
+};
+
+export const jobPostingFiltersDataArray = [
+  {
+    componentProps: {
+      name: 'category',
+      label: 'Category',
+      select: true,
+    },
+    options: [
+      { value: 'Sales', label: 'Sales' },
+      { value: 'Marketing', label: 'Marketing' },
+      { value: 'Service', label: 'Service' },
+      { value: 'Operations', label: 'Operations' },
+      { value: 'Loyalty Program', label: 'Loyalty Program' },
+    ],
+    component: RHFSelect,
+    md: 12,
+  },
+  {
+    componentProps: {
+      name: 'createdBy',
+      label: 'createdBy',
+      select: true,
+    },
+    options: [
+      { value: 'John Doe', label: 'John Doe' },
+      { value: 'William', label: 'William' },
+      { value: 'Andrew', label: 'Andrew' },
+    ],
+    component: RHFSelect,
+    md: 12,
+  },
+  {
+    componentProps: {
+      name: 'createdDate',
+      label: 'Created Date',
+      fullWidth: true,
+    },
+    component: RHFDatePicker,
+    md: 12,
+  },
+  {
+    componentProps: {
+      name: 'status',
+      label: 'Status',
+      select: true,
+    },
+    options: [
+      { value: 'Open', label: 'Open' },
+      { value: 'Close', label: 'Close' },
+    ],
+    component: RHFSelect,
     md: 12,
   },
 ];

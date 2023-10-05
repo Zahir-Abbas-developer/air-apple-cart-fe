@@ -22,6 +22,9 @@ import { styles } from './Jobs.styles';
 import {
   jobPostingDataArray,
   jobPostingDefaultValues,
+  jobPostingFiltersDataArray,
+  jobPostingFiltersDefaultValues,
+  jobPostingFiltersValidationSchema,
   jobPostingValidationSchema,
 } from './jobPosting.data';
 
@@ -102,16 +105,24 @@ const JobPosting = ({
 
   const theme = useTheme();
   const [jobPostingSearch, setJobPostingSearch] = useState<string>('');
+  const [isJobPostingFilterDrawer, setIsJobPostingFilterDrawer] =
+    useState<boolean>(false);
 
-  const methodsCreateNewTicketForm = useForm({
+  const methodsAddJobPosting = useForm({
     resolver: yupResolver(jobPostingValidationSchema),
     defaultValues: jobPostingDefaultValues,
+  });
+  const methodsFilterJobPosting = useForm({
+    resolver: yupResolver(jobPostingFiltersValidationSchema),
+    defaultValues: jobPostingFiltersDefaultValues,
   });
 
   const onSubmit = () => {
     setIsJobPostingDrawer(false);
   };
-  const { handleSubmit } = methodsCreateNewTicketForm;
+
+  const { handleSubmit } = methodsAddJobPosting;
+  const { handleSubmit: filterSubmitHandler } = methodsFilterJobPosting;
 
   return (
     <Box>
@@ -141,7 +152,10 @@ const JobPosting = ({
           <Button sx={styles.refreshButton}>
             <RefreshSharedIcon />
           </Button>
-          <Button sx={styles.filterButton(theme)}>
+          <Button
+            sx={styles.filterButton(theme)}
+            onClick={() => setIsJobPostingFilterDrawer(true)}
+          >
             <FilterSharedIcon /> &nbsp; Filter
           </Button>
         </Box>
@@ -165,11 +179,43 @@ const JobPosting = ({
       >
         <>
           <FormProvider
-            methods={methodsCreateNewTicketForm}
+            methods={methodsAddJobPosting}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Grid container spacing={4}>
               {jobPostingDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
+      </CommonDrawer>
+      <CommonDrawer
+        isDrawerOpen={isJobPostingFilterDrawer}
+        onClose={() => setIsJobPostingFilterDrawer(false)}
+        title="Filters"
+        okText="Apply"
+        isOk={true}
+        footer={true}
+        submitHandler={filterSubmitHandler(onSubmit)}
+      >
+        <>
+          <FormProvider
+            methods={methodsFilterJobPosting}
+            onSubmit={filterSubmitHandler(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {jobPostingFiltersDataArray?.map((item: any) => (
                 <Grid item xs={12} md={item?.md} key={uuidv4()}>
                   <item.component {...item.componentProps} size={'small'}>
                     {item?.componentProps?.select

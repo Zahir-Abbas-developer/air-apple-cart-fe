@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Checkbox, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Typography,
+  useTheme,
+  Grid,
+} from '@mui/material';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
+import { FormProvider } from '@/components/ReactHookForm';
+
+import { useForm } from 'react-hook-form';
+
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
 import { styles } from './TaxCalculations.styles';
+import {
+  addTaxFormDefaultValues,
+  addTaxFormFiltersDataArray,
+  addTaxFormValidationSchema,
+  taxFormFiltersDefaultValues,
+  taxFormFiltersFiltersDataArray,
+  taxFormFiltersValidationSchema,
+} from './TaxCalculations.data';
 
 const TaxCalculation = () => {
   const theme = useTheme();
@@ -84,6 +106,22 @@ const TaxCalculation = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsAddTaxForm = useForm({
+    resolver: yupResolver(addTaxFormValidationSchema),
+    defaultValues: addTaxFormDefaultValues,
+  });
+
+  const methodsTaxFormFilters = useForm({
+    resolver: yupResolver(taxFormFiltersValidationSchema),
+    defaultValues: taxFormFiltersDefaultValues,
+  });
+
+  const onSubmit = () => {
+    setIsTaxCalculationDrawerOpen(false);
+  };
+  const { handleSubmit } = methodsAddTaxForm;
+  const { handleSubmit: submitHandler } = methodsTaxFormFilters;
 
   return (
     <Box
@@ -162,9 +200,30 @@ const TaxCalculation = () => {
         okText="Apply"
         isOk={true}
         footer={true}
-        submitHandler={() => setIsTaxCalculationFilterDrawerOpen(false)}
+        submitHandler={submitHandler(onSubmit)}
       >
-        <Box>Filters</Box>
+        <>
+          <FormProvider
+            methods={methodsAddTaxForm}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {taxFormFiltersFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
 
       <CommonDrawer
@@ -174,9 +233,30 @@ const TaxCalculation = () => {
         okText="Apply"
         isOk={true}
         footer={true}
-        submitHandler={() => setIsTaxCalculationDrawerOpen(false)}
+        submitHandler={handleSubmit(onSubmit)}
       >
-        <Box>Tax Calculation Form</Box>
+        <>
+          <FormProvider
+            methods={methodsAddTaxForm}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {addTaxFormFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
     </Box>
   );
