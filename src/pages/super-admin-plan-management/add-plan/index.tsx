@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Layout from '@/layouts/Layout';
+import Layout from '@/layout';
 
-import AddPlanModule from '@/modules/PlanManagement/AddPlan/AddPlan';
+import AddPlan from '@/modules/PlanManagement/AddPlan';
 
 const AddPlanPage = () => {
-  return <AddPlanModule />;
+  return <AddPlan />;
 };
 
 export default AddPlanPage;
