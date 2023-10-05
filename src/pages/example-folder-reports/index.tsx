@@ -1,4 +1,4 @@
-import SuperAdminLayout from '@/layouts/SuperAdminLayout/SuperAdminLayout';
+import Layout from '@/layout';
 import ExampleFolderReports from '@/modules/ExampleFolderReports';
 
 function ExampleFolderReportsPage() {
@@ -7,5 +7,5 @@ function ExampleFolderReportsPage() {
 export default ExampleFolderReportsPage;
 
 ExampleFolderReportsPage.getLayout = function getLayout(page: any) {
-  return <SuperAdminLayout>{page}</SuperAdminLayout>;
+  return <Layout>{page}</Layout>;
 };
