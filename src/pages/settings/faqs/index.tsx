@@ -1,5 +1,6 @@
-import Layout from '@/layouts/Layout';
-import Faqs from '@/modules/Settings/Faqs';
+import Layout from '@/layout';
+import Faqs from '@/modules/superAdmin/settings/Faqs';
+
 const FaqsPage = () => {
   return <Faqs />;
 };

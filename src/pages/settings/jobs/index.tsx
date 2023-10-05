@@ -1,5 +1,5 @@
-import Layout from '@/layouts/Layout';
-import Jobs from '@/modules/settings/Jobs';
+import Layout from '@/layout';
+import Jobs from '@/modules/superAdmin/settings/Jobs';
 
 const JobsPage = () => {
   return <Jobs />;

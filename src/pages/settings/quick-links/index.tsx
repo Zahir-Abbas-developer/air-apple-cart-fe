@@ -1,5 +1,5 @@
-import Layout from '@/layouts/Layout';
-import QuickLinks from '@/modules/settings/QuickLinks';
+import Layout from '@/layout';
+import QuickLinks from '@/modules/superAdmin/settings/QuickLinks';
 const QuickLinksPage = () => {
   return <QuickLinks />;
 };

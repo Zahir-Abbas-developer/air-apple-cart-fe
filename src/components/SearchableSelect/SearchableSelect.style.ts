@@ -31,7 +31,7 @@ export const styles = {
           boxShadow: '0px 0px 0px 3px #A0E5DB80',
         },
       },
-      width: { lg: '440px', md: '440px', sm: '100%', xs: '100%' },
+      width: '100%',
       '& input': {
         height: `${height ? height : '44px'}`,
         border: `none`,
@@ -53,7 +53,7 @@ export const styles = {
           boxShadow: '0px 0px 0px 3px #A0E5DB80',
         },
       },
-      width: { lg: '440px', md: '440px', sm: '100%', xs: '100%' },
+      width: '100%',
       '& input': {
         height: '44px',
         border: `none`,

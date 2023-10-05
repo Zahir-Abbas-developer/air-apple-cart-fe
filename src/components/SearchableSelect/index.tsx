@@ -80,7 +80,7 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
       render={({ field, fieldState }) => (
         <>
           <Typography
-            variant="h6"
+            variant="body2"
             mt={1}
             style={{ color: theme?.palette.grey[600] }}
           >

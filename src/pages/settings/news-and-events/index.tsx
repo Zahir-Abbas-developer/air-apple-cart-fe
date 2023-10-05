@@ -1,5 +1,5 @@
-import Layout from '@/layouts/Layout';
-import NewsAndEvents from '@/modules/settings/NewsAndEvents';
+import Layout from '@/layout';
+import NewsAndEvents from '@/modules/superAdmin/settings/NewsAndEvents';
 const NewsAndEventsPage = () => {
   return <NewsAndEvents />;
 };
