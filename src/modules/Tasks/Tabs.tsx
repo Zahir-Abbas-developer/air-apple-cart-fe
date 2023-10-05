@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { TasksData } from '@/mock/shared/tasks';
 import Filter from './FilterWrapper';
 import { uuid } from 'uuidv4';
+import { useTask } from './actionHandler';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,17 +42,14 @@ function a11yProps(index: number) {
 }
 
 export default function TabsComp() {
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  const { handleToggler, handleTabChange, tabValue, toggler } = useTask();
 
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
-          value={value}
-          onChange={handleChange}
+          value={tabValue}
+          onChange={handleTabChange}
           aria-label="basic tabs example"
         >
           {TasksData.map(({ index, label }) => (
@@ -60,24 +58,30 @@ export default function TabsComp() {
         </Tabs>
         <Filter
           searchBarProps={{
-            placeholder: 'sdkljhjkfhkjsdghds',
+            placeholder: 'Search Here ...',
           }}
           handleActionBtn={(val) => {
             val;
           }}
-          handleToggler={(val) => {
-            val;
-          }}
+          // disableActionBtn
+          handleToggler={(val: any) => handleToggler(val)}
           handleRefreshList={() => {
             'refresh';
           }}
         />
       </Box>
-      {TasksData.map(({ index, children }) => (
-        <CustomTabPanel value={value} index={index} key={uuid()}>
-          {children}
-        </CustomTabPanel>
-      ))}
+      {toggler === 'listView' &&
+        TasksData.map(({ index, tableChildren }) => (
+          <CustomTabPanel value={tabValue} index={index} key={uuid()}>
+            {tableChildren}
+          </CustomTabPanel>
+        ))}
+      {toggler === 'gridView' &&
+        TasksData.map(({ index, gridChildtren }) => (
+          <CustomTabPanel value={tabValue} index={index} key={uuid()}>
+            {gridChildtren}
+          </CustomTabPanel>
+        ))}
     </Box>
   );
 }

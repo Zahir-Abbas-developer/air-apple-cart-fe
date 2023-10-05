@@ -14,6 +14,7 @@ interface Props {
   handleToggler: ({}) => void;
   handleRefreshList?: () => void;
   searchBarProps?: TextFieldProps;
+  disableActionBtn?: boolean;
 }
 
 const Filter = ({
@@ -21,6 +22,7 @@ const Filter = ({
   handleActionBtn = () => {},
   handleToggler = () => {},
   handleRefreshList = () => {},
+  disableActionBtn,
 }: Props) => {
   return (
     <Box sx={styles.filterWrapper}>
@@ -42,7 +44,10 @@ const Filter = ({
             <RefreshIcon />
           </Button>
         </Tooltip>
-        <ActionBtn onChange={handleActionBtn} />
+        <ActionBtn
+          disableActionBtn={disableActionBtn}
+          onChange={handleActionBtn}
+        />
         <EditColumn />
         <FilterComp />
         <Toggler onClick={handleToggler} />

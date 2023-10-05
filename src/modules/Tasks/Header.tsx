@@ -1,16 +1,16 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import ManageQueues from './ManageQueues';
 import Import from './Import';
 import ActivityAndPerformance from './ActivityAndPerformance/ActivityAndPerformance';
 import CreateTask from './CreateTask';
+import ManageQueues from './ManageQueues';
 
 const Header = () => {
   return (
     <Box sx={style.header}>
       <Typography sx={style.title}>Tasks</Typography>
       <Box sx={style.action}>
-        <ManageQueues />
+        <ManageQueues />5
         <Import />
         <ActivityAndPerformance />
         <CreateTask />

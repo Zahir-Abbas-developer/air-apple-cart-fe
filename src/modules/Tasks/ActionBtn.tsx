@@ -6,9 +6,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 interface Props {
   onChange: ({}) => void;
+  disableActionBtn?: boolean;
 }
 
-const ActionBtn = ({ onChange }: Props) => {
+const ActionBtn = ({ disableActionBtn, onChange }: Props) => {
   const MenuItems = ['Edit', 'View Activity', 'Change Status', 'Delete'];
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null,
@@ -30,6 +31,14 @@ const ActionBtn = ({ onChange }: Props) => {
         variant="outlined"
         endIcon={<ArrowDropDownIcon />}
         onClick={handleClick}
+        disabled={disableActionBtn}
+        classes={{ outlined: 'outlined_btn' }}
+        sx={{
+          '&.outlined_btn': {
+            color: disableActionBtn ? '#D1D5DB' : '',
+            borderColor: disableActionBtn ? '#D1D5DB' : '',
+          },
+        }}
       >
         Actions
       </Button>
