@@ -1,7 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   Box,
+  Checkbox,
+  FormControlLabel,
   InputAdornment,
   MenuItem,
   TextField,
@@ -28,13 +30,19 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
   control,
   rules,
   label,
-  width,
   height,
+  multiple = false,
 }) => {
   const [isSearchableSelect, setIsSearchableSelect] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const textFieldRef = useRef<HTMLDivElement | null>(null);
   const theme = useTheme();
+
+  const [isMultiple, setIsMultiple] = useState(multiple);
+
+  useEffect(() => {
+    setIsMultiple(multiple);
+  }, [multiple]);
 
   const selectOptions = useMemo(() => {
     const query = searchQuery.toLowerCase();
@@ -55,20 +63,14 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
     event.stopPropagation();
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        textFieldRef.current &&
-        !textFieldRef.current.contains(event.target as Node)
-      ) {
-        setIsSearchableSelect(false);
-      }
-    };
-    window.addEventListener('click', handleClickOutside);
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  const handleCheckboxChange = (item: any) => {
+    const index = selectedItems.indexOf(item);
+    if (index === -1) {
+      setSelectedItems([...selectedItems, item]);
+    } else {
+      setSelectedItems(selectedItems.filter((label) => label !== item));
+    }
+  };
 
   return (
     <Controller
@@ -88,12 +90,9 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
             <TextField
               id={name}
               variant="outlined"
-              value={field?.value?.label}
-              placeholder="Select"
               contentEditable={false}
               onClick={() => setIsSearchableSelect(!isSearchableSelect)}
-              sx={styles.textareaSearchDropdown(width, height)}
-              ref={textFieldRef}
+              sx={styles.textareaSearchDropdown(height)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -105,6 +104,18 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
               helperText={fieldState.error?.message || ''}
               {...field}
             />
+            <Box
+              sx={styles.renderText}
+              onClick={() => setIsSearchableSelect(!isSearchableSelect)}
+            >
+              {selectedItems.length
+                ? selectedItems
+                  ? selectedItems.map((item: any) => item.label).join(', ')
+                  : 'Select'
+                : field?.value
+                ? field.value.label
+                : 'Select'}
+            </Box>
             {isSearchableSelect && (
               <Box sx={styles.wrapperSearchDropdown}>
                 <TextField
@@ -116,17 +127,35 @@ const SearchableSelect: React.FC<SearchableSelectPropsI> = ({
                   onChange={(e) => setSearchQuery(e.target.value)}
                   sx={styles.searchSelect(theme)}
                 />
+
                 {!isNullOrEmpty(selectOptions) &&
-                  selectOptions.map((item: DropdownDataPropsI) => (
-                    <MenuItem
-                      value={item.id}
-                      key={item.id}
-                      onClick={() => {
-                        field.onChange(item.label);
-                        setIsSearchableSelect(false);
-                      }}
-                    >
-                      {renderOption(item)}
+                  selectOptions.map((item: any) => (
+                    <MenuItem key={item.id}>
+                      {isMultiple ? (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={selectedItems.includes(item)}
+                              onChange={() => (
+                                handleCheckboxChange(item),
+                                field.onChange(selectedItems)
+                              )}
+                            />
+                          }
+                          label={renderOption(item)}
+                        />
+                      ) : (
+                        <MenuItem
+                          value={item.id}
+                          onClick={() => {
+                            field.onChange(item);
+                            setIsSearchableSelect(false);
+                          }}
+                          sx={{ padding: '0px', width: '100%' }}
+                        >
+                          {renderOption(item)}
+                        </MenuItem>
+                      )}
                     </MenuItem>
                   ))}
               </Box>
