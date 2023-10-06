@@ -7,10 +7,9 @@ import {
   Typography,
   useTheme,
   Grid,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-
-import { FormProvider } from '@/components/ReactHookForm';
-import { useForm } from 'react-hook-form';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
@@ -19,15 +18,20 @@ import CustomPagination from '@/components/CustomPagination';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { v4 as uuidv4 } from 'uuid';
+import { FormProvider } from '@/components/ReactHookForm';
+import { useForm } from 'react-hook-form';
 
-import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+import { enquiriesTabledata } from '@/mock/modules/Settings/Enquiries';
 
-import { styles } from './Enquiries.styles';
 import {
   enquiriesFiltersDefaultValues,
   enquiriesFiltersFiltersDataArray,
   enquiriesFiltersValidationSchema,
 } from './Enquiries.data';
+
+import { DownIcon, FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+
+import { styles } from './Enquiries.styles';
 
 const Enquiries = () => {
   const theme = useTheme();
@@ -35,17 +39,15 @@ const Enquiries = () => {
     useState(false);
   const [faqsSearch, setFaqsSearch] = useState('');
 
-  const data: any = [
-    {
-      id: 1,
-      name: 'John Doe',
-      companyName: 'Orcalo Holdings',
-      email: 'jhon.doe@mail.com',
-      phoneNumber: '447788921',
-      comments: 'Looking for your sale product',
-      status: 'done',
-    },
-  ];
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const actionMenuOpen = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -151,6 +153,33 @@ const Enquiries = () => {
             gap: '10px',
           }}
         >
+          <Button
+            id="basic-button"
+            aria-controls={actionMenuOpen ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={actionMenuOpen ? 'true' : undefined}
+            onClick={handleClick}
+            sx={{
+              color: theme.palette.grey[500],
+              height: '40px',
+              border: '1.5px solid #e7e7e9',
+            }}
+          >
+            Actions &nbsp; <DownIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={actionMenuOpen}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem>Reply</MenuItem>
+            <MenuItem>View</MenuItem>
+            <MenuItem>Delete</MenuItem>
+          </Menu>
           <Button sx={styles.refreshButton}>
             <RefreshSharedIcon />
           </Button>
@@ -163,7 +192,7 @@ const Enquiries = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={enquiriesTabledata} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}

@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, Checkbox } from '@mui/material';
+import Image from 'next/image';
+
+import { Box, Button, Typography, Checkbox, Grid } from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
+import { FormProvider } from '@/components/ReactHookForm';
+import { useForm } from 'react-hook-form';
+
+import {
+  productFeaturesDefaultValues,
+  productFeaturesFiltersDataArray,
+  productFeaturesValidationSchema,
+} from './ProductFeatures.data';
+
+import { SalesIcon } from '@/assets/images';
 import PlusShared from '@/assets/icons/shared/plus-shared';
+import { productFeatureTableData } from '@/mock/modules/Settings/ProductFeature';
 
 const ProductFeature = () => {
   const [isAddProductFeatureDrawer, setIsAddProductFeatureDrawer] =
     useState(false);
   const [productFeatureSearch, setProductFeatureSearch] = useState('');
-  const data: any = [
-    {
-      id: 1,
-      productName: 'Sales',
-      productFeatureName: 'XYZ',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      status: 'active',
-      createdBy: 'John Doe',
-      createdDate: '12/4/2023',
-    },
-  ];
+
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -36,7 +40,17 @@ const ProductFeature = () => {
     {
       accessorFn: (row: any) => row.productName,
       id: 'productName',
-      cell: (info: any) => info.getValue(),
+      cell: () => (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            fontWeight: '500 !important',
+          }}
+        >
+          <Image src={SalesIcon} /> Sales
+        </Box>
+      ),
       header: 'Product Name',
       isSortable: false,
     },
@@ -76,6 +90,16 @@ const ProductFeature = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsProductFeatures = useForm({
+    resolver: yupResolver(productFeaturesValidationSchema),
+    defaultValues: productFeaturesDefaultValues,
+  });
+  const onSubmit = () => {
+    setIsAddProductFeatureDrawer(false);
+  };
+  const { handleSubmit } = methodsProductFeatures;
+
   return (
     <Box
       sx={{
@@ -95,7 +119,7 @@ const ProductFeature = () => {
         <Typography variant="h3" sx={{ fontWeight: '600' }}>
           Product Features Setup
         </Typography>
-        <Box>Filter here</Box>
+        <Box>...</Box>
       </Box>
       <Box
         mt={2}
@@ -129,7 +153,7 @@ const ProductFeature = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={productFeatureTableData} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}
@@ -144,9 +168,30 @@ const ProductFeature = () => {
         okText="Apply"
         isOk={true}
         footer={true}
-        submitHandler={() => setIsAddProductFeatureDrawer(false)}
+        submitHandler={handleSubmit(onSubmit)}
       >
-        <p>ssdsd</p>
+        <>
+          <FormProvider
+            methods={methodsProductFeatures}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {productFeaturesFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
     </Box>
   );

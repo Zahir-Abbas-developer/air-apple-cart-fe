@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, useTheme, Checkbox } from '@mui/material';
+import {
+  Box,
+  Button,
+  Typography,
+  useTheme,
+  Checkbox,
+  Grid,
+} from '@mui/material';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
-import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+import { FormProvider } from '@/components/ReactHookForm';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
+import { useForm } from 'react-hook-form';
+
+import { newsAndEventsTabledata } from '@/mock/modules/Settings/NewsAndEvents';
+
+import {
+  newsAndEventsDateDefaultValues,
+  newsAndEventsDateFiltersDataArray,
+  newsAndEventsDateValidationSchema,
+} from './NewsAndEvents.data';
+
 import PlusShared from '@/assets/icons/shared/plus-shared';
+import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 
 import { styles } from './NewsAndEvents.style';
 
@@ -17,16 +37,7 @@ const NewsAndEvents = () => {
   const [isNewsAndEventsFilterDrawerOpen, setIsNewsAndEventsFilterDrawerOpen] =
     useState(false);
   const [newsAndEventsSearch, setNewsAndEventsSearch] = useState('');
-  const data: any = [
-    {
-      id: 1,
-      name: 'Twitter Logo',
-      description: 'Elon musk changed twitter logo',
-      type: 'Event',
-      createdDate: '12-may-2023',
-      status: 'active',
-    },
-  ];
+
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -71,6 +82,16 @@ const NewsAndEvents = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsNewsAndEventsFilters = useForm({
+    resolver: yupResolver(newsAndEventsDateValidationSchema),
+    defaultValues: newsAndEventsDateDefaultValues,
+  });
+  const onSubmit = () => {
+    setIsNewsAndEventsFilterDrawerOpen(false);
+  };
+  const { handleSubmit } = methodsNewsAndEventsFilters;
+
   return (
     <Box
       sx={{
@@ -131,7 +152,7 @@ const NewsAndEvents = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={newsAndEventsTabledata} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}
@@ -145,9 +166,30 @@ const NewsAndEvents = () => {
         okText="Apply"
         isOk={true}
         footer={true}
-        submitHandler={() => setIsNewsAndEventsFilterDrawerOpen(false)}
+        submitHandler={handleSubmit(onSubmit)}
       >
-        <p>ssdsd</p>
+        <>
+          <FormProvider
+            methods={methodsNewsAndEventsFilters}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {newsAndEventsDateFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
     </Box>
   );

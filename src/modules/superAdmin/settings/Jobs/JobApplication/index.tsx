@@ -2,40 +2,33 @@ import React, { useState } from 'react';
 
 import { Box, useTheme, Button, Checkbox, Grid } from '@mui/material';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { v4 as uuidv4 } from 'uuid';
-
 import CommonDrawer from '@/components/CommonDrawer';
 import Search from '@/components/Search';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
 import { FormProvider } from '@/components/ReactHookForm';
-
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
 
-import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+import { jobApplicationTabledata } from '@/mock/modules/Settings/Jobs';
 
-import { styles } from './JobsApplication.styles';
 import {
   jobApplicationDefaultValues,
   jobApplicationFiltersDataArray,
   jobApplicationValidationSchema,
 } from './JobApplication.data';
 
+import {
+  DocumentIcon,
+  FilterSharedIcon,
+  RefreshSharedIcon,
+} from '@/assets/icons';
+
+import { styles } from './JobsApplication.styles';
+
 const JobApplication = () => {
-  const data: any = [
-    {
-      id: 1,
-      jobTitle: 'React JS Developer',
-      candidate: 'We are looking for  a ...',
-      applyDate: 'Marketing',
-      jobPostedDate: '1',
-      resume: 'Arlene McCoy',
-      coverLetter: '10/04/2023',
-      status: 'open',
-    },
-  ];
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -77,14 +70,14 @@ const JobApplication = () => {
       id: 'resume',
       isSortable: true,
       header: 'Resume',
-      cell: (info: any) => info.getValue(),
+      cell: () => <DocumentIcon />,
     },
     {
       accessorFn: (row: any) => row.coverLetter,
       id: 'coverLetter',
       isSortable: true,
       header: 'Cover Letter',
-      cell: (info: any) => info.getValue(),
+      cell: () => <DocumentIcon />,
     },
     {
       accessorFn: (row: any) => row.status,
@@ -147,7 +140,7 @@ const JobApplication = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={jobApplicationTabledata} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}

@@ -9,22 +9,19 @@ import {
   Grid,
 } from '@mui/material';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { v4 as uuidv4 } from 'uuid';
-
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
 import { FormProvider } from '@/components/ReactHookForm';
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 
 import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
-import { styles } from './TaxCalculations.styles';
 import {
   addTaxFormDefaultValues,
   addTaxFormFiltersDataArray,
@@ -33,6 +30,9 @@ import {
   taxFormFiltersFiltersDataArray,
   taxFormFiltersValidationSchema,
 } from './TaxCalculations.data';
+
+import { styles } from './TaxCalculations.styles';
+import { taxCalculationTableData } from '@/mock/modules/Settings/TaxCalculation';
 
 const TaxCalculation = () => {
   const theme = useTheme();
@@ -44,17 +44,6 @@ const TaxCalculation = () => {
     useState(false);
   const [taxCalculationSearch, setTaxCalculationSearch] = useState('');
 
-  const data: any = [
-    {
-      id: 1,
-      taxName: 'VAT',
-      taxPercentage: '20 %',
-      description: 'This is valued added tax for ....',
-      createDate: '12-May-2023',
-      activeModule: ['invoce form', 'add product form', 'Subscription'],
-      status: 'active',
-    },
-  ];
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -185,7 +174,7 @@ const TaxCalculation = () => {
       </Box>
 
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={taxCalculationTableData} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}

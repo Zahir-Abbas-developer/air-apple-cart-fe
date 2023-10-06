@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography, Checkbox } from '@mui/material';
+import { Box, Button, Typography, Checkbox, Grid } from '@mui/material';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
+import { FormProvider } from '@/components/ReactHookForm';
+import { useForm } from 'react-hook-form';
 
 import Search from '@/components/Search';
 import CommonDrawer from '@/components/CommonDrawer';
 import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
+
+import { planTypeCreationTableData } from '@/mock/modules/Settings/PlanTypeCreation';
+
+import {
+  planTypeCreationDefaultValues,
+  planTypeCreationFiltersDataArray,
+  planTypeCreationValidationSchema,
+} from './PlanTypeCreation';
 
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
@@ -14,16 +27,6 @@ const PlanTypeCreation = () => {
     useState(false);
   const [planTypeCreationSearch, setPlanTypeCreationSearch] = useState('');
 
-  const data: any = [
-    {
-      id: 1,
-      planTypeName: 'React JS Developer',
-      description: 'We are looking for  a ...',
-      createdBy: 'Arlene McCoy',
-      createdDate: '10/04/2023',
-      status: 'open',
-    },
-  ];
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -68,6 +71,16 @@ const PlanTypeCreation = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsPlanTypeCreation = useForm({
+    resolver: yupResolver(planTypeCreationValidationSchema),
+    defaultValues: planTypeCreationDefaultValues,
+  });
+
+  const onSubmit = () => {
+    setIsPlanTypeCreationDrawer(false);
+  };
+  const { handleSubmit } = methodsPlanTypeCreation;
 
   return (
     <Box
@@ -122,7 +135,7 @@ const PlanTypeCreation = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={planTypeCreationTableData} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}
@@ -136,9 +149,30 @@ const PlanTypeCreation = () => {
         okText="Apply"
         isOk={true}
         footer={true}
-        submitHandler={() => setIsPlanTypeCreationDrawer(false)}
+        submitHandler={handleSubmit(onSubmit)}
       >
-        <p>ssdsd</p>
+        <>
+          <FormProvider
+            methods={methodsPlanTypeCreation}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Grid container spacing={4}>
+              {planTypeCreationFiltersDataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select
+                      ? item?.options?.map((option: any) => (
+                          <option key={option?.value} value={option?.value}>
+                            {option?.label}
+                          </option>
+                        ))
+                      : null}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </>
       </CommonDrawer>
     </Box>
   );

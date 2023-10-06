@@ -24,10 +24,22 @@ import {
 } from '@/assets/icons';
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import { v4 as uuidv4 } from 'uuid';
+import { FormProvider } from '@/components/ReactHookForm';
+import { useForm } from 'react-hook-form';
+
+import {
+  quickLinksData,
+  quickLinksTableData,
+} from '@/mock/modules/Settings/QuickLinks';
+import { quickLinksFilterFiltersDataArray } from './QuickLinks.data';
+import {
+  jobApplicationDefaultValues,
+  jobApplicationValidationSchema,
+} from '../Jobs/JobApplication/JobApplication.data';
 
 import { styles } from './QuickLinks.style';
-import { quickLinksData } from '@/mock/modules/Settings/QuickLinks';
 
 const QuickLinks = () => {
   const theme = useTheme();
@@ -38,15 +50,6 @@ const QuickLinks = () => {
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-  const data: any = [
-    {
-      id: 1,
-      product: 'sales',
-      moduleName: 'deals',
-      createdDate: '12-july-2023',
-      url: 'https://www.airapplecart.co.uk',
-    },
-  ];
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -84,6 +87,16 @@ const QuickLinks = () => {
       cell: (info: any) => info.getValue(),
     },
   ];
+
+  const methodsJobApplication = useForm({
+    resolver: yupResolver(jobApplicationValidationSchema),
+    defaultValues: jobApplicationDefaultValues,
+  });
+
+  const onSubmit = () => {
+    setIsQuickLinksFilterDrawerOpen(false);
+  };
+  const { handleSubmit } = methodsJobApplication;
 
   return (
     <>
@@ -149,7 +162,7 @@ const QuickLinks = () => {
             </Box>
           </Box>
           <Box>
-            <TanstackTable columns={columns} data={data} />
+            <TanstackTable columns={columns} data={quickLinksTableData} />
             <CustomPagination
               count={1}
               rowsPerPageOptions={[1, 2]}
@@ -165,7 +178,28 @@ const QuickLinks = () => {
             footer={true}
             submitHandler={() => setIsQuickLinksFilterDrawerOpen(false)}
           >
-            Quick links Filters
+            <>
+              <FormProvider
+                methods={methodsJobApplication}
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <Grid container spacing={4}>
+                  {quickLinksFilterFiltersDataArray?.map((item: any) => (
+                    <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                      <item.component {...item.componentProps} size={'small'}>
+                        {item?.componentProps?.select
+                          ? item?.options?.map((option: any) => (
+                              <option key={option?.value} value={option?.value}>
+                                {option?.label}
+                              </option>
+                            ))
+                          : null}
+                      </item.component>
+                    </Grid>
+                  ))}
+                </Grid>
+              </FormProvider>
+            </>
           </CommonDrawer>
         </Box>
       ) : (

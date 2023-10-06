@@ -7,6 +7,8 @@ import {
   Typography,
   Grid,
   useTheme,
+  MenuItem,
+  Menu,
 } from '@mui/material';
 
 import Search from '@/components/Search';
@@ -15,20 +17,20 @@ import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { v4 as uuidv4 } from 'uuid';
-
 import { FormProvider } from '@/components/ReactHookForm';
 import { useForm } from 'react-hook-form';
 
-import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
-import PlusShared from '@/assets/icons/shared/plus-shared';
+import { faqsTableDate } from '@/mock/modules/Settings/Faqs';
 
 import {
   faqsFilterDefaultValues,
   faqsFilterFiltersDataArray,
   faqsFilterValidationSchema,
 } from './Faqs.data';
+
+import { DownIcon, FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+import PlusShared from '@/assets/icons/shared/plus-shared';
 
 import { styles } from './Faqs.styles';
 
@@ -37,17 +39,15 @@ const Faqs = () => {
   const [isFaqsFilterDrawerOpen, setIsFaqsFilterDrawerOpen] = useState(false);
   const [faqsSearch, setFaqsSearch] = useState('');
 
-  const data: any = [
-    {
-      id: 1,
-      question: 'What is React JS Developer ?',
-      faqCategory: 'Marketing',
-      answer:
-        'JSX stands for JavaScript XML. JSX is an XML/HTML like extension to JavaScript.',
-      createdBy: 'Arlene McCoy',
-      createdDate: '10/04/2023',
-    },
-  ];
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const actionMenuOpen = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -148,6 +148,33 @@ const Faqs = () => {
             gap: '10px',
           }}
         >
+          <Button
+            id="basic-button"
+            aria-controls={actionMenuOpen ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={actionMenuOpen ? 'true' : undefined}
+            onClick={handleClick}
+            sx={{
+              color: theme.palette.grey[500],
+              height: '40px',
+              border: '1.5px solid #e7e7e9',
+            }}
+          >
+            Actions &nbsp; <DownIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={actionMenuOpen}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>View</MenuItem>
+            <MenuItem onClick={handleClose}>Delete</MenuItem>
+          </Menu>
           <Button sx={styles.refreshButton}>
             <RefreshSharedIcon />
           </Button>
@@ -160,7 +187,7 @@ const Faqs = () => {
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={faqsTableDate} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}

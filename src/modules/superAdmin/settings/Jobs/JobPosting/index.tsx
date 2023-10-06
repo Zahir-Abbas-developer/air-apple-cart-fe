@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
-import { Box, useTheme, Button, Checkbox, Grid } from '@mui/material';
-
-import { yupResolver } from '@hookform/resolvers/yup';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  Box,
+  useTheme,
+  Button,
+  Checkbox,
+  Grid,
+  MenuItem,
+  Menu,
+} from '@mui/material';
 
 import CommonDrawer from '@/components/CommonDrawer';
 import Search from '@/components/Search';
@@ -11,14 +16,14 @@ import TanstackTable from '@/components/Tabel/TanstackTable';
 import CustomPagination from '@/components/CustomPagination';
 
 import { FormProvider } from '@/components/ReactHookForm';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
+import { useForm } from 'react-hook-form';
 
 import { JobPostingPropsI } from './JobPostingProps.interface';
 
-import { useForm } from 'react-hook-form';
+import { jobPostingTabledata } from '@/mock/modules/Settings/Jobs';
 
-import { FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
-
-import { styles } from './Jobs.styles';
 import {
   jobPostingDataArray,
   jobPostingDefaultValues,
@@ -28,22 +33,14 @@ import {
   jobPostingValidationSchema,
 } from './jobPosting.data';
 
+import { DownIcon, FilterSharedIcon, RefreshSharedIcon } from '@/assets/icons';
+
+import { styles } from './Jobs.styles';
+
 const JobPosting = ({
   isJobPostingDrawer,
   setIsJobPostingDrawer,
 }: JobPostingPropsI) => {
-  const data: any = [
-    {
-      id: 1,
-      jobTitle: 'React JS Developer',
-      shortDescription: 'We are looking for  a ...',
-      category: 'Marketing',
-      noOfVacancy: '1',
-      createdBy: 'Arlene McCoy',
-      createdDate: '10/04/2023',
-      status: 'open',
-    },
-  ];
   const columns: any = [
     {
       accessorFn: (row: any) => row.id,
@@ -108,6 +105,15 @@ const JobPosting = ({
   const [isJobPostingFilterDrawer, setIsJobPostingFilterDrawer] =
     useState<boolean>(false);
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const actionMenuOpen = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const methodsAddJobPosting = useForm({
     resolver: yupResolver(jobPostingValidationSchema),
     defaultValues: jobPostingDefaultValues,
@@ -149,6 +155,38 @@ const JobPosting = ({
             gap: '10px',
           }}
         >
+          <Button
+            id="basic-button"
+            aria-controls={actionMenuOpen ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={actionMenuOpen ? 'true' : undefined}
+            onClick={handleClick}
+            sx={{
+              color: theme.palette.grey[500],
+              height: '40px',
+              border: '1.5px solid #e7e7e9',
+            }}
+          >
+            Actions &nbsp; <DownIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={actionMenuOpen}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={() => setIsJobPostingDrawer(true)}>
+              Edit
+            </MenuItem>
+            <MenuItem onClick={() => setIsJobPostingDrawer(true)}>
+              View
+            </MenuItem>
+            <MenuItem onClick={handleClose}>Delete</MenuItem>
+          </Menu>
+
           <Button sx={styles.refreshButton}>
             <RefreshSharedIcon />
           </Button>
@@ -161,7 +199,7 @@ const JobPosting = ({
         </Box>
       </Box>
       <Box>
-        <TanstackTable columns={columns} data={data} />
+        <TanstackTable columns={columns} data={jobPostingTabledata} />
         <CustomPagination
           count={1}
           rowsPerPageOptions={[1, 2]}

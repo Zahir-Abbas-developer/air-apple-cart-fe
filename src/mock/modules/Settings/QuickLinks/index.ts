@@ -315,3 +315,13 @@ export const quickLinksData = [
     ],
   },
 ];
+
+export const quickLinksTableData: any = [
+  {
+    id: 1,
+    product: 'sales',
+    moduleName: 'deals',
+    createdDate: '12-july-2023',
+    url: 'https://www.airapplecart.co.uk',
+  },
+];
