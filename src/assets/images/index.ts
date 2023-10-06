@@ -1,5 +1,16 @@
 // More exports from here
+export { default as ExampleKababCaseImg } from './shared/example-shared-case.png';
+export { default as ExampleSharedCase } from './shared/example-shared-case.png';
+export { default as UmbrellaIcon } from './shared/umbrella';
+export { default as RecycleIcon } from './shared/recycle';
+export { default as RefreshIcon } from './shared/refreshIcon';
+export { default as EditColumnIcon } from './shared/editColumn';
+export { default as FilterIcon } from './shared/filterIcon';
+export { default as ListViewIcon } from './shared/listViewIcon';
+export { default as GridViewIcon } from './shared/gridViewIcon';
 export { default as AvatarImage } from './shared/avatar.png';
+export { default as DragIcon } from './shared/dragIcon';
+// export { default as LogoImage } from './shared/Logo.png';
 export { default as LogoImage } from './shared/app-logo.png';
 export { default as LinkImage } from './modules/HeaderAndSidebar/link.png';
 export { default as QuickLinkImage } from './modules/HeaderAndSidebar/quick-link.png';
@@ -38,6 +49,7 @@ export { default as NotificationAvatarImage } from './modules/HeaderAndSidebar/n
 export { default as ArrowSquareLeftImage } from './modules/HeaderAndSidebar/arrow-square-left.png';
 // export { default as AvatarImage } from './shared/avatar.png';
 export { default as AddPenIcon } from './modules/organization/edit-blue-pen';
+export { default as UserProfileImage } from './shared/user-profile.png';
 export { default as AssetsImage } from './modules/HeaderAndSidebar/assets.png';
 export { default as TicketDiscountImage } from './modules/HeaderAndSidebar/ticket-discount.png';
 export { default as WorkLoadImage } from './modules/HeaderAndSidebar/workload.png';
@@ -49,6 +61,7 @@ export { default as ProblemImage } from './modules/HeaderAndSidebar/problems.png
 export { default as ChangeCircleImage } from './modules/HeaderAndSidebar/change-circle.png';
 export { default as KnowledgeBaseImage } from './modules/HeaderAndSidebar/knowledge-base.png';
 export { default as LoginDashboardImage } from '../../assets/images/shared/login-dashboard.png';
+export { default as RQCodeImage } from '../../assets/images/shared/qr-code.png';
 export { default as DiscussionImage } from '../../assets/images/modules/tickets/meetings/discussion.png';
 export { default as TeamsImage } from '../../assets/images/modules/tickets/meetings/teams.png';
 export { default as ZoomImage } from '../../assets/images/modules/tickets/meetings/zoom.png';
@@ -60,3 +73,4 @@ export { default as EditImage } from '../../assets/images/modules/organization/e
 export { default as FeaturedImage } from '../../assets/images/modules/organization/Featuredicon.png';
 export { default as ComLogoImage } from '../../assets/images/modules/organization/intellogo.png';
 export { default as OrcaloLogoImage } from '../../assets/images/modules/organization/orcalologo.png';
+export { default as SalesIcon } from '../../assets/images/modules/Settings/ProductFeatures/sales-icon.png';
