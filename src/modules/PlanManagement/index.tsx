@@ -4,9 +4,10 @@ import Link from 'next/link';
 
 import { Button, Typography, Box } from '@mui/material';
 
+import PlanDetails from './PlanDetails';
 import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
 
-import { avatarGroupMockData } from './Plan-Management-Data';
+import { avatarGroupMockData } from './PlanManagement.data';
 
 const PlanManagement = () => {
   return (
@@ -31,17 +32,15 @@ const PlanManagement = () => {
       </Box>
 
       <br />
-      <br />
       <AppAvatarGroup data={avatarGroupMockData} />
 
-      <Typography variant="h5">Table Here</Typography>
+      <PlanDetails />
     </div>
   );
 };
 
 export default PlanManagement;
 
-// ==================================================================================================================================
 const styles = {
   planManagementHeading: {
     fontWeight: 600,

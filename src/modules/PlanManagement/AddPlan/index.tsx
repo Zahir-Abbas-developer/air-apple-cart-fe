@@ -2,10 +2,9 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Box, Typography } from '@mui/material';
 
-import useAddPlan from './useAppPlan';
+import useAddPlan from './UseAppPlan';
 
 import { ArrowLeftIcon } from '@/assets/icons';
 

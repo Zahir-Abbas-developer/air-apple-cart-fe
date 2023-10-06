@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@mui/material';
 
 const PlanFeatures = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
@@ -20,13 +22,29 @@ const PlanFeatures = () => {
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
         disableGutters
+        sx={{
+          '&.MuiAccordion': {
+            '&.Mui-expanded': {
+              boxShadow: 'theme.customShadows.z8',
+              borderRadius: '8px',
+            },
+            '&.Mui-disabled': {
+              backgroundColor: 'transparent',
+            },
+          },
+          '& .MuiAccordionSummary-root': {
+            backgroundColor: '#1F305D',
+            color: '#fff',
+            borderRadius: '8px',
+          },
+        }}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
+          aria-controls="panel1-content"
           id="panel1a-header"
         >
-          <Typography>Accordion 1</Typography>
+          <Typography>Sales</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -39,13 +57,21 @@ const PlanFeatures = () => {
         expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
         disableGutters
+        sx={{
+          marginTop: '2rem',
+          '& .MuiAccordionSummary-root': {
+            backgroundColor: '#1F305D',
+            color: '#fff',
+            borderRadius: '8px',
+          },
+        }}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Accordion 2</Typography>
+          <Typography>Marketting</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

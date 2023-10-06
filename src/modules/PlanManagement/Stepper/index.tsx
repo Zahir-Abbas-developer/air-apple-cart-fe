@@ -1,20 +1,22 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import { styled, useTheme } from '@mui/material/styles';
-import StepConnector, {
-  stepConnectorClasses,
-} from '@mui/material/StepConnector';
+import {
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  styled,
+  useTheme,
+  StepConnector,
+} from '@mui/material';
+import { stepConnectorClasses } from '@mui/material/StepConnector';
 
 import Check from '@mui/icons-material/Check';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { AppHorizontalStepperProps } from './stepper.types';
+import { AppHorizontalStepperProps } from './stepper.interface';
 
 const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
   stepsArray,
