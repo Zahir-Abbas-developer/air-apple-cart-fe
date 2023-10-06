@@ -1,4 +1,4 @@
-import CommonDrawer from '@/components/Drawer';
+import CommonDrawer from '@/components/CommonDrawer';
 import React from 'react';
 import InputField from '@/components/InputField';
 
@@ -14,9 +14,11 @@ const CreateDeals = (props: any) => {
       {
         <CommonDrawer
           isDrawerOpen={isCreateOpen}
-          setIsDrawerOpen={() => setIsCreateOpen(true)}
+          onClose={() => setIsCreateOpen(true)}
           title="Create Deal"
-          okText={'Craete'}
+          okText="Craete"
+          cancelText="Cancel"
+          footer
           isOk={true}
           submitHandler={handleSubmiter}
         >

@@ -1,4 +1,4 @@
-import SalesDeals from '@/modules/DealsSaleSite/Deals';
+import SalesDeals from '@/modules/DealsSaleSite';
 import React from 'react';
 
 const Deals = () => {

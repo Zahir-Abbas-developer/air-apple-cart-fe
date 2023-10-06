@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import CommonDrawer from '@/components/Drawer';
+import CommonDrawer from '@/components/CommonDrawer';
 import { Box, Typography, useTheme } from '@mui/material';
-import ImportMapColumnsDeal from './ImportMapColumnsDeal';
 
 const ImportColumn = (props: any) => {
   const theme = useTheme();
@@ -18,14 +17,15 @@ const ImportColumn = (props: any) => {
     <>
       <CommonDrawer
         isDrawerOpen={IsImportDetails}
-        setIsDrawerOpen={setIsImportDetails}
+        onClose={setIsImportDetails}
         title="Import Deals"
         okText={columnsSelect ? 'Import' : 'Next'}
+        footer
         isOk={true}
         submitHandler={columnsSelect ? handleImport : handleNext}
       >
         <Typography
-          sx={{ color: '#374151', marginTop: '16px', marginBottom: '8px' }}
+          sx={{ color: '#374151', margin: '20px 16px', marginBottom: '8px' }}
         >
           {columnsSelect
             ? 'Map Columns from your file to the right CRM fields. Your 5 unmapped columns won’t be imported'
@@ -40,9 +40,11 @@ const ImportColumn = (props: any) => {
             width: '26%',
             textAlign: 'center',
             color: '#FFFFFF',
+            margin: '0 10px',
           }}
         >
-          Step {columnsSelect ? '2' : '1'} of 2
+          Step {columnsSelect ? '2' : '1'} of 2Uploaded file must have these
+          columns
         </Typography>
         {!columnsSelect ? (
           <Box>
@@ -52,7 +54,8 @@ const ImportColumn = (props: any) => {
             <ul
               style={{
                 paddingLeft: '30px',
-                color: theme?.palette?.grey[500_12],
+                color: theme?.palette?.grey[500],
+                // color: theme?.palette?.grey[500_12],
               }}
             >
               <li>Name</li>
@@ -63,7 +66,7 @@ const ImportColumn = (props: any) => {
             </Typography>
           </Box>
         ) : (
-          <ImportMapColumnsDeal />
+          <></>
         )}
       </CommonDrawer>
     </>

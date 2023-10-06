@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
-import { useTheme } from '@emotion/react';
-import { InterfaceInputTextField } from '@/types/modules/InputField';
+import { useTheme } from '@mui/material/styles';
+import { InputPropsI } from '@/types/modules/InputField';
 
 export default function InputField({
   field,
@@ -12,7 +12,7 @@ export default function InputField({
   InputProps,
   type,
   hasError,
-}: InterfaceInputTextField) {
+}: InputPropsI) {
   const theme = useTheme();
 
   const inputStyle = {

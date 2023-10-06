@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DealsMenu, Umbrella } from '@/assets/icons';
+import { MenuIcon } from '@/assets/icons';
 import { Typography, Box, Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CustomizeColumns from '../ImportColumn/ImportColumn';
@@ -25,7 +25,7 @@ const DealsBar = () => {
           variant="h4"
           sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}
         >
-          <DealsMenu /> Deals
+          <MenuIcon /> Deals
         </Typography>
         <Box
           sx={{
@@ -40,7 +40,7 @@ const DealsBar = () => {
             variant="outlined"
             sx={{ gap: '8px' }}
           >
-            <Umbrella /> Import
+            <MenuIcon /> Import
           </Button>
 
           <Button

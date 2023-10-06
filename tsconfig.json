@@ -17,6 +17,11 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/mock/modules/DealsTableData"
+  ],
   "exclude": ["node_modules"]
 }
