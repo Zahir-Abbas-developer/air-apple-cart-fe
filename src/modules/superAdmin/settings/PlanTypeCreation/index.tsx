@@ -18,7 +18,7 @@ import {
   planTypeCreationDefaultValues,
   planTypeCreationFiltersDataArray,
   planTypeCreationValidationSchema,
-} from './PlanTypeCreation';
+} from './PlanTypeCreation.data';
 
 import PlusShared from '@/assets/icons/shared/plus-shared';
 
