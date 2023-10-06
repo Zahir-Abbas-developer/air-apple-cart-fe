@@ -8,6 +8,7 @@ import {
   Tab,
   Theme,
   useTheme,
+  Grid,
 } from '@mui/material';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -17,6 +18,20 @@ import UserTable from './UserTable';
 import TeamsTable from './TeamsTable';
 
 import CommonDrawer from '@/components/CommonDrawer';
+
+import { FormProvider } from '@/components/ReactHookForm';
+
+import { useForm } from 'react-hook-form';
+
+import {
+  dataArray,
+  defaultValues,
+  validationSchema,
+} from './UserManagement.data';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { v4 as uuidv4 } from 'uuid';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -28,7 +43,7 @@ function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -40,7 +55,7 @@ function CustomTabPanel(props: TabPanelProps) {
           <Typography>{children}</Typography>
         </Box>
       )}
-    </div>
+    </Box>
   );
 }
 
@@ -51,10 +66,10 @@ function a11yProps(index: number) {
   };
 }
 
-const UserManagement = () => {
+const UserManagement = ({ initialValueProps = defaultValues }: any) => {
   const [value, setValue] = React.useState(0);
-  const [addUserOpen, setAddUserOpen] = useState(false);
-  const [createTeamOpen, setCreateTeamOpen] = useState(false);
+  const [isAddUserOpen, setIsAddUserOpen] = useState(false);
+  const [isCreateTeamOpen, setIsCreateTeamOpen] = useState(false);
   const theme = useTheme<Theme>();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -62,14 +77,27 @@ const UserManagement = () => {
   };
 
   const handleCloseDrawer = () => {
-    setAddUserOpen(false);
-    setCreateTeamOpen(false);
+    setIsAddUserOpen(false);
+    setIsCreateTeamOpen(false);
   };
+
+  const methods: any = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: initialValueProps,
+  });
+
+  // const { handleSubmit } = methods;
+  // const onSubmit = async (data: any) => {
+  //   console.log(data);
+  //   enqueueSnackbar('Ticket Updated Successfully', {
+  //     variant: 'success',
+  //   });
+  // };
 
   return (
     <>
       <CommonDrawer
-        isDrawerOpen={addUserOpen}
+        isDrawerOpen={isAddUserOpen}
         onClose={handleCloseDrawer}
         title={'Add User'}
         okText={'OK'}
@@ -77,10 +105,36 @@ const UserManagement = () => {
         isOk={true}
         // submitHandler={}
       >
-        aDD USER form
+        <Typography
+          sx={{
+            fontWeight: 500,
+            fontSize: '12px',
+            color: `${theme.palette.custom.main}`,
+          }}
+        >
+          Add New User to Organization
+        </Typography>
+        <Box sx={{ paddingTop: '1rem' }}>
+          <FormProvider methods={methods}>
+            <Grid container spacing={4}>
+              {dataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select &&
+                      item?.options?.map((option: any) => (
+                        <option key={option?.value} value={option?.value}>
+                          {option?.label}
+                        </option>
+                      ))}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </Box>
       </CommonDrawer>
       <CommonDrawer
-        isDrawerOpen={createTeamOpen}
+        isDrawerOpen={isCreateTeamOpen}
         onClose={handleCloseDrawer}
         title={'Create Team'}
         okText={'OK'}
@@ -110,7 +164,9 @@ const UserManagement = () => {
           <Button
             onClick={() => {
               {
-                value === 0 ? setAddUserOpen(true) : setCreateTeamOpen(true);
+                value === 0
+                  ? setIsAddUserOpen(true)
+                  : setIsCreateTeamOpen(true);
               }
             }}
             variant="contained"

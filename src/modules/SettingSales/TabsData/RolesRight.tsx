@@ -2,18 +2,15 @@ import React, { useState } from 'react';
 
 import {
   Box,
-  Table,
   Typography,
   Button,
   InputAdornment,
   TextField,
   MenuItem,
   Menu,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Theme,
+  useTheme,
+  Grid,
 } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -22,28 +19,29 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+import { FormProvider } from '@/components/ReactHookForm';
+
+import { useForm } from 'react-hook-form';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { v4 as uuidv4 } from 'uuid';
+
 import CommonDrawer from '@/components/CommonDrawer';
+import TanstackTable from '@/components/Tabel/TanstackTable';
+import {
+  RolesAndRightTableData,
+  columns,
+  dataArray,
+  defaultValues,
+  validationSchema,
+} from './RolesRight.data';
+import CustomPagination from '@/components/CustomPagination';
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-) {
-  return { name, calories, fat, carbs };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Ice cream sandwich', 237, 9.0, 37),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Cupcake', 305, 3.7, 67),
-  createData('Gingerbread', 356, 16.0, 49),
-];
-
-const RolesRight = () => {
-  const [draweropen, setdraweropen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
+const RolesRight = ({ initialValueProps = defaultValues }: any) => {
+  const [isDraweropen, setIsDraweropen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const theme = useTheme<Theme>();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -51,18 +49,31 @@ const RolesRight = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    setEditOpen(true);
+    setIsEditOpen(true);
     setAnchorEl(null);
   };
   const handleCloseDrawer = () => {
-    setdraweropen(false);
-    setEditOpen(false);
+    setIsDraweropen(false);
+    setIsEditOpen(false);
   };
+
+  const methods: any = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: initialValueProps,
+  });
+
+  // const { handleSubmit } = methods;
+  // const onSubmit = async (data: any) => {
+  //   console.log(data);
+  //   enqueueSnackbar('Ticket Updated Successfully', {
+  //     variant: 'success',
+  //   });
+  // };
 
   return (
     <>
       <CommonDrawer
-        isDrawerOpen={draweropen}
+        isDrawerOpen={isDraweropen}
         onClose={handleCloseDrawer}
         title={'Add New Role'}
         okText={'OK'}
@@ -70,10 +81,27 @@ const RolesRight = () => {
         isOk={true}
         // submitHandler={}
       >
-        form
+        <Box sx={{ paddingTop: '1rem' }}>
+          <FormProvider methods={methods}>
+            <Grid container spacing={4}>
+              {dataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select &&
+                      item?.options?.map((option: any) => (
+                        <option key={option?.value} value={option?.value}>
+                          {option?.label}
+                        </option>
+                      ))}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </Box>
       </CommonDrawer>
       <CommonDrawer
-        isDrawerOpen={editOpen}
+        isDrawerOpen={isEditOpen}
         onClose={handleCloseDrawer}
         title={'User Role'}
         okText={'OK'}
@@ -81,11 +109,28 @@ const RolesRight = () => {
         isOk={true}
         // submitHandler={}
       >
-        EDIT form
+        <Box sx={{ paddingTop: '1rem' }}>
+          <FormProvider methods={methods}>
+            <Grid container spacing={4}>
+              {dataArray?.map((item: any) => (
+                <Grid item xs={12} md={item?.md} key={uuidv4()}>
+                  <item.component {...item.componentProps} size={'small'}>
+                    {item?.componentProps?.select &&
+                      item?.options?.map((option: any) => (
+                        <option key={option?.value} value={option?.value}>
+                          {option?.label}
+                        </option>
+                      ))}
+                  </item.component>
+                </Grid>
+              ))}
+            </Grid>
+          </FormProvider>
+        </Box>
       </CommonDrawer>
       <Box
         sx={{
-          border: '1px solid #EAECF0',
+          border: `1px solid ${theme?.palette?.grey[700]}`,
           padding: '1rem',
           boxShadow: '0px 1px 2px 0px #1018280F',
           borderRadius: '8px',
@@ -105,10 +150,15 @@ const RolesRight = () => {
               display: 'flex',
               columnGap: '10px',
             }}
-            onClick={() => setdraweropen(true)}
+            onClick={() => setIsDraweropen(true)}
           >
-            <AddCircleIcon sx={{ color: '#ffff', fontSize: '16px' }} /> Add New
-            Role
+            <AddCircleIcon
+              sx={{
+                color: `${theme?.palette?.common.white}`,
+                fontSize: '16px',
+              }}
+            />{' '}
+            Add New Role
           </Button>
         </Box>
         <Box
@@ -138,9 +188,9 @@ const RolesRight = () => {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             sx={{
-              border: '1px solid #D1D5DB',
+              border: `1px solid ${theme?.palette?.custom.dark}`,
               borderRadius: '4px',
-              color: '#6B7280',
+              color: `${theme?.palette?.custom.main}`,
               display: 'flex',
               alignItems: 'center',
             }}
@@ -161,49 +211,14 @@ const RolesRight = () => {
             <MenuItem onClick={handleClose}>Delete</MenuItem>
           </Menu>
         </Box>
-        <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead sx={{ background: '#EAECF0' }}>
-              <TableRow>
-                <TableCell sx={{ color: '#1F305D' }}>Roll ID</TableCell>
-                <TableCell sx={{ color: '#1F305D' }} align="center">
-                  Roll Name
-                </TableCell>
-                <TableCell sx={{ color: '#1F305D' }} align="center">
-                  Created On
-                </TableCell>
-                <TableCell sx={{ color: '#1F305D' }} align="center">
-                  Description
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell
-                    sx={{ color: '#6B7280' }}
-                    component="th"
-                    scope="row"
-                  >
-                    {row.name}
-                  </TableCell>
-                  <TableCell sx={{ color: '#6B7280' }} align="center">
-                    {row.calories}
-                  </TableCell>
-                  <TableCell sx={{ color: '#6B7280' }} align="center">
-                    {row.fat}
-                  </TableCell>
-                  <TableCell sx={{ color: '#6B7280' }} align="center">
-                    {row.carbs}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Grid>
+          <TanstackTable columns={columns} data={RolesAndRightTableData} />
+          <CustomPagination
+            count={1}
+            rowsPerPageOptions={[1, 2]}
+            entriePages={1}
+          />
+        </Grid>
       </Box>
     </>
   );
