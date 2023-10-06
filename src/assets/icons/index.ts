@@ -34,7 +34,7 @@ export { default as ActionButtonIcon } from './shared/action-button-icon';
 export { default as ArrowDownIcon } from './shared/arrow-down';
 export { default as RefreshSharedIcon } from './shared/refresh-shared';
 
-export { default as ArrowBackIcon } from './shared/arrow-back';
+// export { default as ArrowBackIcon } from './shared/arrow-back';
 
 export { default as ArrowUp } from './shared/arrow-up';
 export { default as ArrowDown } from './shared/arrow-down';
