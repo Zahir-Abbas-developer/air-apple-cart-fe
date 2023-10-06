@@ -1,6 +1,5 @@
 import { TextField } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { InputPropsI } from '@/types/modules/InputField';
+import { InterfaceInputTextField } from '@/types/modules/InputField';
 
 export default function InputField({
   field,
@@ -11,10 +10,8 @@ export default function InputField({
   autoComplete,
   InputProps,
   type,
-  hasError,
-}: InputPropsI) {
-  const theme = useTheme();
-
+  error,
+}: InterfaceInputTextField) {
   const inputStyle = {
     '& div': {
       border: 'none',
@@ -32,11 +29,6 @@ export default function InputField({
       padding: '10px',
       color: 'black',
     },
-    '& fieldset': {
-      border: `1.5px solid ${
-        hasError ? theme?.palette?.error?.main : theme?.palette?.grey[700]
-      }`,
-    },
   };
 
   return (
@@ -50,6 +42,8 @@ export default function InputField({
       sx={inputStyle}
       InputProps={InputProps}
       type={type}
+      error={error}
+      helperText={error}
     />
   );
 }
