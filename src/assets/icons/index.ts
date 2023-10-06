@@ -1,5 +1,14 @@
-// More exports from here
-
+export { default as CloseDrawerIcon } from './shared/close-drawer-icon';
+export { default as ProductSalesIcon } from './modules/OrganizationSubscription/product-sales-icon';
+export { default as ProductServiceIcon } from './modules/OrganizationSubscription/product-service-icon';
+export { default as ProductMarketingIcon } from './modules/OrganizationSubscription/product-marketing-icon';
+export { default as ProductOperationIcon } from './modules/OrganizationSubscription/product-operation-icon';
+export { default as ProductLoyaltyProgramIcon } from './modules/OrganizationSubscription/product-loyalty-program-icon';
+export { default as PlaneIcon } from './modules/OrganizationSubscription/plane-icon';
+export { default as ArrowBackIcon } from './modules/OrganizationSubscription/arrow-back-icon';
+export { default as MinusCircleIcon } from './modules/OrganizationSubscription/minus-cirlce-icon';
+export { default as AddCircleIcon } from './modules/OrganizationSubscription/add-circle-icon';
+export { default as TickCircleIcon } from './modules/OrganizationSubscription/tick-circle-icon';
 export { default as ExampleKababCase } from './modules/Login/example-kabab-case';
 export { default as ArrowLeftIcon } from './modules/PlanManagement/arrow-left';
 // export { default as ExampleKababCase } from './sections/login/example-kabab-case';
@@ -25,7 +34,7 @@ export { default as ActionButtonIcon } from './shared/action-button-icon';
 export { default as ArrowDownIcon } from './shared/arrow-down';
 export { default as RefreshSharedIcon } from './shared/refresh-shared';
 
-export { default as ArrowBackIcon } from './shared/arrow-back';
+// export { default as ArrowBackIcon } from './shared/arrow-back';
 
 export { default as ArrowUp } from './shared/arrow-up';
 export { default as ArrowDown } from './shared/arrow-down';
