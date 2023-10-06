@@ -16,13 +16,13 @@ import Check from '@mui/icons-material/Check';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { AppHorizontalStepperProps } from './stepper.interface';
+import { SingleStepI, HorizontalStepperI } from './stepper.interface';
 
-const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
+const AppHorizontalStepper: React.FC<HorizontalStepperI> = ({
   stepsArray,
   // TODO: Handling form actions
   // addPlanFormValues,
-  // setAddPlanFormValues,
+  // setAddPlanFormValues
   disableNextButton,
   stepperPadding = '4rem 0',
   stepperMargin = '2rem 0',
@@ -53,7 +53,7 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
         connector={<CustomConnector />}
       >
         {Boolean(stepsArray?.length) &&
-          stepsArray?.map((singleStem: any, index: any) => (
+          stepsArray?.map((singleStem: SingleStepI, index: any) => (
             <Step key={uuidv4()} className={index === 0 ? 'first-step' : ''}>
               <StepLabel
                 StepIconComponent={CustomStepIcon}
@@ -105,7 +105,7 @@ const AppHorizontalStepper: React.FC<AppHorizontalStepperProps> = ({
 
 export default AppHorizontalStepper;
 
-function CustomStepIcon(props: any) {
+const CustomStepIcon = (props: any) => {
   const { active, completed, className } = props;
   const theme = useTheme();
 
@@ -125,7 +125,7 @@ function CustomStepIcon(props: any) {
       )}
     </CustomStepIconRoot>
   );
-}
+};
 
 const CustomStepIconRoot = styled('div')<{
   ownerState: { active?: boolean };

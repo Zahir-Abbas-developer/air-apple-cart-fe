@@ -1,9 +1,9 @@
 import Layout from '@/layout';
 
-import PlanManagementModule from '@/modules/PlanManagement';
+import PlanManagement from '@/modules/superAdmin/PlanManagement';
 
 const SuperAdminPlanManagementPage = () => {
-  return <PlanManagementModule />;
+  return <PlanManagement />;
 };
 
 export default SuperAdminPlanManagementPage;

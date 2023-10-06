@@ -1,10 +1,10 @@
-export interface IStep {
+export interface SingleStepI {
   key: string;
   label: string;
   component: React.ReactNode;
 }
-export interface AppHorizontalStepperProps {
-  stepsArray: IStep[];
+export interface HorizontalStepperI {
+  stepsArray: SingleStepI[];
   addPlanFormValues: any;
   setAddPlanFormValues: React.Dispatch<React.SetStateAction<any>>;
   disableNextButton?: boolean;

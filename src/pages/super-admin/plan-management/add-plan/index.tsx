@@ -1,6 +1,6 @@
 import Layout from '@/layout';
 
-import AddPlan from '@/modules/PlanManagement/AddPlan';
+import AddPlan from '@/modules/superAdmin/PlanManagement/AddPlan';
 
 const AddPlanPage = () => {
   return <AddPlan />;

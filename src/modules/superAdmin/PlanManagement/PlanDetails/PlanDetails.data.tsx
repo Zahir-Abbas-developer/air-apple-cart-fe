@@ -9,7 +9,7 @@ export const TABLE_CONSTANTS = {
   CREATE_NEW_TICKET: 'create-new-ticket',
 };
 
-export const ticketsListsData: any = [
+export const PlanDetailsData: any = [
   {
     id: 1,
     planId: ` #123`,
@@ -48,7 +48,7 @@ export const ticketsListsData: any = [
   },
 ];
 
-export const ticketsListsColumnFunction: any = (theme: any, router: any) => {
+export const PlanDetailsDataColumnFunction: any = (theme: any, router: any) => {
   return [
     {
       accessorFn: (row: any) => row.id,

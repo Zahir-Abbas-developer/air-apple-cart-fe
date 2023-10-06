@@ -4,12 +4,14 @@ import Link from 'next/link';
 
 import { Button, Typography, Box } from '@mui/material';
 
-import PlanDetails from './PlanDetails';
 import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
+
+import PlanDetails from './PlanDetails';
 
 import { avatarGroupMockData } from './PlanManagement.data';
 
 const PlanManagement = () => {
+  // Test commment
   return (
     <div>
       <Box
@@ -23,7 +25,7 @@ const PlanManagement = () => {
         </Typography>
 
         <Box sx={styles.linkStyle}>
-          <Link href={'/super-admin-plan-management/add-plan'}>
+          <Link href={'/super-admin/plan-management/add-plan'}>
             <Button variant="contained" fullWidth>
               Add Plan
             </Button>
