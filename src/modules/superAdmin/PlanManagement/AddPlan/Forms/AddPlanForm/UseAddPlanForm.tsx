@@ -13,7 +13,7 @@ import {
   defaultValuesFunction,
 } from './AddPlanForm.data';
 
-export default function useAddPlanForm() {
+export const useAddPlanForm = () => {
   const router = useRouter();
 
   const formDefaultValuesFunction = dataArray(router?.query?.action === 'view');
@@ -23,7 +23,7 @@ export default function useAddPlanForm() {
     defaultValues: defaultValuesFunction(defaultValues),
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit = async () => {
     // console.log(data);
@@ -32,6 +32,7 @@ export default function useAddPlanForm() {
     enqueueSnackbar('', {
       variant: 'success',
     });
+    // ahdsa;iljd sapjdsa;kd sa;kd
     // } catch (error: any) {
     //   const errMsg = error?.data?.message;
     //   enqueueSnackbar(errMsg ?? "Something Went Wrong!", { variant: "error" });
@@ -41,8 +42,7 @@ export default function useAddPlanForm() {
   return {
     formDefaultValuesFunction,
     handleSubmit,
-    reset,
     methods,
     onSubmit,
   };
-}
+};

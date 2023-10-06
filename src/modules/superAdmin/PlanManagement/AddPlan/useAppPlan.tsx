@@ -6,9 +6,10 @@ import ModulesForm from './Forms/ModulesForm';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const useAddPlan = () => {
+export const UseAddPlan = () => {
   const [addPlanFormValues, setAddPlanFormValues] = useState({});
 
+  // test comment
   const AddPlanStepperData = [
     {
       key: uuidv4(),
@@ -32,5 +33,3 @@ const useAddPlan = () => {
 
   return { addPlanFormValues, setAddPlanFormValues, AddPlanStepperData };
 };
-
-export default useAddPlan;

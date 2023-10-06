@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Box, Typography } from '@mui/material';
 
-import useAddPlan from './UseAppPlan';
+import { UseAddPlan } from './useAppPlan';
 
 import { ArrowLeftIcon } from '@/assets/icons';
 
@@ -12,7 +12,7 @@ import AppHorizontalStepper from '../Stepper/Index';
 
 const AddPlan = () => {
   const { addPlanFormValues, setAddPlanFormValues, AddPlanStepperData } =
-    useAddPlan();
+    UseAddPlan();
   return (
     <div>
       <Box display={'flex'} alignItems={'center'} gap={1}>

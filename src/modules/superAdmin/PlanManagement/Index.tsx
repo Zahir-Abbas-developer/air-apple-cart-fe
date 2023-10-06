@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Button, Typography, Box } from '@mui/material';
 
-import AppAvatarGroup from '@/components/AvatarGroup/AvatarGroup';
+import AppAvatarGroup from '@/components/AvatarGroup';
 
 import PlanDetails from './PlanDetails';
 

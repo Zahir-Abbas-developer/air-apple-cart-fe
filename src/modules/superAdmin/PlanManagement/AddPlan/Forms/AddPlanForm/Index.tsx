@@ -3,7 +3,8 @@ import React from 'react';
 import { Button, Grid } from '@mui/material';
 
 import { FormProvider } from '@/components/ReactHookForm';
-import useAddPlanForm from './UseAddPlanForm';
+
+import { useAddPlanForm } from './UseAddPlanForm';
 
 import { v4 as uuidv4 } from 'uuid';
 

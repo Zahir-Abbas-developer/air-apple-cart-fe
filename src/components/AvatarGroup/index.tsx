@@ -4,9 +4,9 @@ import { AvatarGroup, Avatar, useTheme } from '@mui/material';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { IAVATARGROUPDATA } from '@/types/shared/AvatarGroup';
+import { SingleAvatarI } from '@/types/shared/AvatarGroup';
 
-const AppAvatarGroup = ({ data }: { data: IAVATARGROUPDATA[] }) => {
+const AppAvatarGroup = ({ data }: { data: SingleAvatarI[] }) => {
   const theme = useTheme();
 
   return (
@@ -28,7 +28,7 @@ const AppAvatarGroup = ({ data }: { data: IAVATARGROUPDATA[] }) => {
       }}
     >
       {Boolean(data?.length) &&
-        data?.map((singleItem: IAVATARGROUPDATA) => (
+        data?.map((singleItem: SingleAvatarI) => (
           <Avatar
             key={uuidv4()}
             alt={singleItem?.name}
