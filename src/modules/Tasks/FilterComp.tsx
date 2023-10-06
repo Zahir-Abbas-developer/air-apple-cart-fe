@@ -6,8 +6,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { uuid } from 'uuidv4';
-import { filterData } from '@/mock/shared/tasks/filter-mock-data';
 import dayjs from 'dayjs';
+import { filterData } from '@/mock/shared/tasks/task.data';
 
 const FilterComp = () => {
   const [values, setValues] = useState<any>({

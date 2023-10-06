@@ -1,19 +1,18 @@
-'use client';
-
 import React from 'react';
-import { Popover, Button, MenuItem } from '@mui/material';
+import { Popover, Button, MenuItem, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { TaskInterfaceProps } from './tasks.interfaces';
+import { ActionBtnStyles } from './Tasks.Style';
 
-interface Props {
-  onChange: ({}) => void;
-  disableActionBtn?: boolean;
-}
+const ActionBtn = ({ disableActionBtn, onChange }: TaskInterfaceProps) => {
+  const theme = useTheme();
 
-const ActionBtn = ({ disableActionBtn, onChange }: Props) => {
-  const MenuItems = ['Edit', 'View Activity', 'Change Status', 'Delete'];
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null,
   );
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const MenuItems = ['Edit', 'View Activity', 'Change Status', 'Delete'];
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,9 +21,6 @@ const ActionBtn = ({ disableActionBtn, onChange }: Props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
   return (
     <>
       <Button
@@ -33,12 +29,7 @@ const ActionBtn = ({ disableActionBtn, onChange }: Props) => {
         onClick={handleClick}
         disabled={disableActionBtn}
         classes={{ outlined: 'outlined_btn' }}
-        sx={{
-          '&.outlined_btn': {
-            color: disableActionBtn ? '#D1D5DB' : '',
-            borderColor: disableActionBtn ? '#D1D5DB' : '',
-          },
-        }}
+        sx={ActionBtnStyles(theme, disableActionBtn)}
       >
         Actions
       </Button>

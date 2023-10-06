@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-import DrawerComp from './Drawer';
-import { DragIcon, EditColumnIcon } from '@/assets/images';
-import Search from '@/components/Search';
 import { Box, Checkbox } from '@mui/material';
+import Search from '@/components/Search';
 import { uuid } from 'uuidv4';
+import { DragIcon, EditColumnIcon } from '@/assets/images';
+import DrawerComp from './Drawer';
+import { drawerTasksData } from '@/mock/shared/tasks/task.data';
 
 const EditColumn = () => {
   const [search, setSearch] = useState('');
-
-  const columnsData = [
-    { title: 'Task Name' },
-    { title: 'Task Status' },
-    { title: 'Linked Company' },
-    { title: 'Assigned User' },
-    { title: 'Task Type' },
-    { title: 'Last Date' },
-  ];
 
   return (
     <DrawerComp
@@ -31,7 +23,7 @@ const EditColumn = () => {
         searchBy={search}
         setSearchBy={setSearch}
       />
-      {columnsData.map((column) => (
+      {drawerTasksData.map((column) => (
         <ColumnsWrapper key={uuid()} title={column.title} />
       ))}
     </DrawerComp>

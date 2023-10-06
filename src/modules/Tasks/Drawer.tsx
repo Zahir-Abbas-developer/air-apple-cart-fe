@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { uuid } from 'uuidv4';
 import CommonDrawer from '@/components/CommonDrawer';
+import { TaskDrawerInterfaceProps } from './tasks.interfaces';
 
 const DrawerComp = ({
   title = 'title',
@@ -13,17 +14,7 @@ const DrawerComp = ({
   isOk = true,
   okText = 'submit',
   hideFooter = false,
-}: {
-  title?: string;
-  children?: React.ReactNode;
-  btnTitle?: string;
-  btnIcon?: React.ReactNode;
-  submitHandler?: () => void;
-  isOk?: boolean;
-  okText?: string;
-  btnVariant?: 'outlined' | 'contained';
-  hideFooter?: boolean;
-}) => {
+}: TaskDrawerInterfaceProps) => {
   const [open, setOpen] = useState(false);
   const handleToggle = () => setOpen(!open);
   return (

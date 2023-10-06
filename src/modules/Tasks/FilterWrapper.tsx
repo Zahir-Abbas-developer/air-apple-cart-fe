@@ -8,6 +8,7 @@ import EditColumn from './EditColumn';
 import FilterComp from './FilterComp';
 import Toggler from './Toggler';
 import { RefreshIcon } from '@/assets/images';
+import { filterStyles } from './Tasks.Style';
 
 interface Props {
   handleActionBtn: ({}) => void;
@@ -25,7 +26,7 @@ const Filter = ({
   disableActionBtn,
 }: Props) => {
   return (
-    <Box sx={styles.filterWrapper}>
+    <Box sx={filterStyles.filterWrapper}>
       <TextField
         placeholder="Search Here"
         size="small"
@@ -36,11 +37,7 @@ const Filter = ({
       />
       <Box display={'flex'} alignItems={'center'} gap={'8px'} flexWrap={'wrap'}>
         <Tooltip title={'Refresh Filter'}>
-          <Button
-            variant="outlined"
-            onClick={handleRefreshList}
-            sx={{ minHeight: '36px' }}
-          >
+          <Button variant="outlined" onClick={handleRefreshList}>
             <RefreshIcon />
           </Button>
         </Tooltip>
@@ -57,14 +54,3 @@ const Filter = ({
 };
 
 export default Filter;
-const styles = {
-  filterWrapper: {
-    padding: '12px 24px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: '15px',
-    marginTop: '15px',
-  },
-};

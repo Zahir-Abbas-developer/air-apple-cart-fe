@@ -1,14 +1,19 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import Import from './Import';
 import ActivityAndPerformance from './ActivityAndPerformance/ActivityAndPerformance';
 import CreateTask from './CreateTask';
+import { headerStyles } from './Tasks.Style';
 
 const Header = () => {
+  const theme = useTheme();
+
+  const { header, title, action } = headerStyles(theme);
+
   return (
-    <Box sx={style.header}>
-      <Typography sx={style.title}>Tasks</Typography>
-      <Box sx={style.action}>
+    <Box sx={header}>
+      <Typography sx={title}>Tasks</Typography>
+      <Box sx={action}>
         {/* <ManageQueues /> */}
         <Import />
         <ActivityAndPerformance />
@@ -19,26 +24,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const style = {
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '16px 24px',
-    flexWrap: 'wrap',
-    gap: '15px',
-  },
-  title: {
-    flex: 1,
-    fontSize: '24px',
-    fontWeight: 600,
-    color: '#1F2937',
-  },
-  action: {
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: '8px',
-  },
-};

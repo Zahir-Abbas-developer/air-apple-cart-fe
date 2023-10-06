@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import React from 'react';
+import { TaskTableStyle } from './Tasks.Style';
 
 const TaskTable = ({ data }: any) => {
   const tableHeader = [
@@ -23,11 +24,11 @@ const TaskTable = ({ data }: any) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell size="small" sx={style.tableHead}>
+            <TableCell size="small" sx={TaskTableStyle.tableHead}>
               <Checkbox />
             </TableCell>
             {tableHeader.map((value) => (
-              <TableCell size="small" sx={style.tableHead} key={value}>
+              <TableCell size="small" sx={TaskTableStyle.tableHead} key={value}>
                 {value}
               </TableCell>
             ))}
@@ -35,7 +36,7 @@ const TaskTable = ({ data }: any) => {
         </TableHead>
         <TableBody>
           {data.map((obj: any) => (
-            <TableRow key={obj.id} sx={style.tableBodyCell}>
+            <TableRow key={obj.id} sx={TaskTableStyle.tableBodyCell}>
               <TableCell>
                 <Checkbox />
               </TableCell>
@@ -54,17 +55,3 @@ const TaskTable = ({ data }: any) => {
 };
 
 export default TaskTable;
-
-const style = {
-  tableHead: {
-    textTransform: 'capitalize',
-    borderBottom: '1px solid #EAECF0',
-    backgroundColor: '#F9FAFB',
-  },
-  tableBodyCell: {
-    '& td': {
-      textTransform: 'capitalize',
-      borderBottom: '1px solid #EAECF0',
-    },
-  },
-};

@@ -1,6 +1,7 @@
-import { Box, Checkbox, Grid, Typography } from '@mui/material';
 import React from 'react';
+import { Box, Checkbox, Grid, Typography } from '@mui/material';
 import { uuid } from 'uuidv4';
+import { gridViewStyles } from './Tasks.Style';
 
 const GridView = ({
   title,
@@ -9,6 +10,7 @@ const GridView = ({
   inprogressData,
   completedData,
 }: any) => {
+  // const theme = useTheme();
   return (
     <Grid container spacing={3}>
       <CustomGridWithCardContent title={title} data={data} />
@@ -54,11 +56,14 @@ const CustomBox = ({ label, value, changeStatusColor }: any) => {
       justifyContent={'space-between'}
       mt={'8px'}
     >
-      <Typography sx={{ ...styles.cardSubHead, color: '#6B7280' }}>
+      <Typography sx={{ ...gridViewStyles.cardSubHead, color: '#6B7280' }}>
         {label}
       </Typography>
       <Typography
-        sx={{ ...styles.cardSubHead2, color: changeStatusColor && color }}
+        sx={{
+          ...gridViewStyles.cardSubHead2,
+          color: changeStatusColor && color,
+        }}
       >
         {value}
       </Typography>
@@ -69,19 +74,21 @@ const CustomBox = ({ label, value, changeStatusColor }: any) => {
 const CustomGridWithCardContent = ({ title, data }: any) => {
   return (
     <Grid item md={3} key={uuid()}>
-      <Box sx={styles.cardContainer}>
-        <Box sx={styles.cardTitle}>{title}</Box>
-        <Box sx={styles.cardWrapper}>
+      <Box sx={gridViewStyles.cardContainer}>
+        <Box sx={gridViewStyles.cardTitle}>{title}</Box>
+        <Box sx={gridViewStyles.cardWrapper}>
           {data.map((obj: any) => (
-            <Box sx={styles.cardContent} key={uuid()}>
+            <Box sx={gridViewStyles.cardContent} key={uuid()}>
               <Box
                 display={'flex'}
                 alignItems={'flex-end'}
                 justifyContent={'space-between'}
               >
                 <Box>
-                  <Typography sx={styles.cardHead}>{obj.taskName}</Typography>
-                  <Typography sx={styles.cardSubHead}>
+                  <Typography sx={gridViewStyles.cardHead}>
+                    {obj.taskName}
+                  </Typography>
+                  <Typography sx={gridViewStyles.cardSubHead}>
                     Last Date: {obj.lastDate}
                   </Typography>
                 </Box>
@@ -101,51 +108,4 @@ const CustomGridWithCardContent = ({ title, data }: any) => {
       </Box>
     </Grid>
   );
-};
-
-const styles = {
-  cardContainer: {
-    borderRadius: '10px',
-    border: '1px solid #E5E7EB',
-  },
-  cardTitle: {
-    padding: '10px 16px',
-    fontSize: '14px',
-    fontWeight: 600,
-    color: '#1F305D',
-    boxShadow: '0px 3px 6px 0px #6B72801A',
-    textTransform: 'capitalize',
-  },
-  cardWrapper: {
-    padding: '16px',
-    backgroundColor: '#F9FAFB',
-  },
-  cardContent: {
-    borderRadius: '8px',
-    border: '1px solid #E5E7EB',
-    padding: '10px',
-    backgroundColor: '#fff',
-    '&:not(:last-child)': {
-      marginBottom: '16px',
-    },
-  },
-  cardHead: {
-    fontWeight: 700,
-    fontSize: '14px',
-    color: '#374151',
-    textTransform: 'capitalize',
-  },
-  cardSubHead: {
-    fontWeight: 400,
-    fontSize: '12px',
-    color: '#9CA3AF',
-    marginTop: '3px',
-    textTransform: 'capitalize',
-  },
-  cardSubHead2: {
-    color: '#1F305D',
-    fontWeight: 600,
-    fontSize: '12px',
-    textTransform: 'capitalize',
-  },
 };

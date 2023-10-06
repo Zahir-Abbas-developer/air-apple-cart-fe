@@ -1,18 +1,10 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Tabs, Tab, Typography, Box } from '@mui/material';
 import { TasksData } from '@/mock/shared/tasks';
-import Filter from './FilterWrapper';
 import { uuid } from 'uuidv4';
-import { useTask } from './actionHandler';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import Filter from './FilterWrapper';
+import { useTask } from './useTask';
+import { TabPanelProps } from './tasks.interfaces';
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;

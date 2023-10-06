@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import DrawerComp from '../Drawer';
 import { Button, ButtonGroup, useTheme } from '@mui/material';
+import { RecycleIcon } from '@/assets/images';
+import DrawerComp from '../Drawer';
 import Insights from './Insights';
 import Feed from './Feed';
-import Shedule from './shedule';
-import { RecycleIcon } from '@/assets/images';
+import Shedule from './Shedule';
 
 const ActivityAndPerformance = () => {
   const theme = useTheme();
