@@ -45,10 +45,10 @@ const DrawerComp = ({
         {btnTitle}
       </Button>
       <CommonDrawer
-        requireFooter={hideFooter}
+        footer={hideFooter}
         title={title}
         isDrawerOpen={open}
-        setIsDrawerOpen={handleToggle}
+        onClose={handleToggle}
         key={title + uuid()}
         submitHandler={submitHandler}
         isOk={isOk}
